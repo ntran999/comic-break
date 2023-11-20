@@ -1,0 +1,237 @@
+<div>
+  <div>
+    <h1>
+      Show #<%= @the_show.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/shows">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_show/<%= @the_show.id %>">
+          Delete show
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_show.user_id %>
+      </dd>
+
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_show.name %>
+      </dd>
+
+      <dt>
+        Time
+      </dt>
+      <dd>
+        <%= @the_show.time %>
+      </dd>
+
+      <dt>
+        Date
+      </dt>
+      <dd>
+        <%= @the_show.date %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_show.description %>
+      </dd>
+
+      <dt>
+        Address
+      </dt>
+      <dd>
+        <%= @the_show.address %>
+      </dd>
+
+      <dt>
+        City
+      </dt>
+      <dd>
+        <%= @the_show.city %>
+      </dd>
+
+      <dt>
+        State
+      </dt>
+      <dd>
+        <%= @the_show.state %>
+      </dd>
+
+      <dt>
+        Zip
+      </dt>
+      <dd>
+        <%= @the_show.zip %>
+      </dd>
+
+      <dt>
+        Google api address
+      </dt>
+      <dd>
+        <%= @the_show.google_api_address %>
+      </dd>
+
+      <dt>
+        Show type
+      </dt>
+      <dd>
+        <%= @the_show.show_type_id %>
+      </dd>
+
+      <dt>
+        Show sign ups count
+      </dt>
+      <dd>
+        <%= @the_show.show_sign_ups_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_show.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_show.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit show
+    </h2>
+
+    <form action="/modify_show/<%= @the_show.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_show.user_id %>">
+      </div>
+
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_show.name %>">
+      </div>
+
+      <div>
+        <label for="time_box">
+          Time
+        </label>
+
+        <input type="time" id="time_box" name="query_time" value="<%= @the_show.time %>">
+      </div>
+
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="datetime-local" id="date_box" name="query_date"
+         value="<%= @the_show.date %>">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description"><%= @the_show.description %></textarea>
+      </div>
+
+      <div>
+        <label for="address_box">
+          Address
+        </label>
+
+        <textarea id="address_box" name="query_address"><%= @the_show.address %></textarea>
+      </div>
+
+      <div>
+        <label for="city_box">
+          City
+        </label>
+
+        <input type="text" id="city_box" name="query_city" value="<%= @the_show.city %>">
+      </div>
+
+      <div>
+        <label for="state_box">
+          State
+        </label>
+
+        <input type="text" id="state_box" name="query_state" value="<%= @the_show.state %>">
+      </div>
+
+      <div>
+        <label for="zip_box">
+          Zip
+        </label>
+
+        <input type="text" id="zip_box" name="query_zip" value="<%= @the_show.zip %>">
+      </div>
+
+      <div>
+        <label for="google_api_address_box">
+          Google api address
+        </label>
+
+        <input type="text" id="google_api_address_box" name="query_google_api_address" value="<%= @the_show.google_api_address %>">
+      </div>
+
+      <div>
+        <label for="show_type_id_box">
+          Show type
+        </label>
+
+        <input type="text" id="show_type_id_box" name="query_show_type_id" value="<%= @the_show.show_type_id %>">
+      </div>
+
+      <div>
+        <label for="show_sign_ups_count_box">
+          Show sign ups count
+        </label>
+
+        <input type="text" id="show_sign_ups_count_box" name="query_show_sign_ups_count" value="<%= @the_show.show_sign_ups_count %>">
+      </div>
+
+      <button>
+        Update show
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

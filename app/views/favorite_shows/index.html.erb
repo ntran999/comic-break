@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all favorite shows
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new favorite show
+    </h2>
+
+    <form action="/insert_favorite_show" method="post">
+      <div>
+        <label for="show_id_box">
+          Show
+        </label>
+
+        <input type="text" id="show_id_box" name="query_show_id">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <button>
+        Create favorite show
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Show
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_favorite_shows.each do |a_favorite_show| %>
+      <tr>
+        <td>
+          <%= a_favorite_show.id %>
+        </td>
+
+        <td>
+          <%= a_favorite_show.show_id %>
+        </td>
+
+        <td>
+          <%= a_favorite_show.user_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_favorite_show.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_favorite_show.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/favorite_shows/<%= a_favorite_show.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

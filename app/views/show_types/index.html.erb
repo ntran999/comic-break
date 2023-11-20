@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all show types
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new show type
+    </h2>
+
+    <form action="/insert_show_type" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="shows_count_box">
+          Shows count
+        </label>
+
+        <input type="text" id="shows_count_box" name="query_shows_count">
+      </div>
+
+      <button>
+        Create show type
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Shows count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_show_types.each do |a_show_type| %>
+      <tr>
+        <td>
+          <%= a_show_type.id %>
+        </td>
+
+        <td>
+          <%= a_show_type.name %>
+        </td>
+
+        <td>
+          <%= a_show_type.shows_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_show_type.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_show_type.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/show_types/<%= a_show_type.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

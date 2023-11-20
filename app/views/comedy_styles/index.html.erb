@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      List of all comedy styles
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new comedy style
+    </h2>
+
+    <form action="/insert_comedy_style" method="post">
+      <div>
+        <label for="comedy_style_box">
+          Comedy style
+        </label>
+
+        <input type="text" id="comedy_style_box" name="query_comedy_style">
+      </div>
+
+      <button>
+        Create comedy style
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Comedy style
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_comedy_styles.each do |a_comedy_style| %>
+      <tr>
+        <td>
+          <%= a_comedy_style.id %>
+        </td>
+
+        <td>
+          <%= a_comedy_style.comedy_style %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_comedy_style.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_comedy_style.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/comedy_styles/<%= a_comedy_style.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

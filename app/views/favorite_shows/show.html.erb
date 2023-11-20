@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Favorite show #<%= @the_favorite_show.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/favorite_shows">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_favorite_show/<%= @the_favorite_show.id %>">
+          Delete favorite show
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Show
+      </dt>
+      <dd>
+        <%= @the_favorite_show.show_id %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_favorite_show.user_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_favorite_show.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_favorite_show.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit favorite show
+    </h2>
+
+    <form action="/modify_favorite_show/<%= @the_favorite_show.id %>"  method="post" >
+      <div>
+        <label for="show_id_box">
+          Show
+        </label>
+
+        <input type="text" id="show_id_box" name="query_show_id" value="<%= @the_favorite_show.show_id %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_favorite_show.user_id %>">
+      </div>
+
+      <button>
+        Update favorite show
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

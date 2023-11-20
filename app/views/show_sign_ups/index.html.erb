@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all show sign ups
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new show sign up
+    </h2>
+
+    <form action="/insert_show_sign_up" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="show_id_box">
+          Show
+        </label>
+
+        <input type="text" id="show_id_box" name="query_show_id">
+      </div>
+
+      <button>
+        Create show sign up
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Show
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_show_sign_ups.each do |a_show_sign_up| %>
+      <tr>
+        <td>
+          <%= a_show_sign_up.id %>
+        </td>
+
+        <td>
+          <%= a_show_sign_up.user_id %>
+        </td>
+
+        <td>
+          <%= a_show_sign_up.show_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_show_sign_up.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_show_sign_up.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/show_sign_ups/<%= a_show_sign_up.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

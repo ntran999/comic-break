@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Comic style #<%= @the_comic_style.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/comic_styles">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_comic_style/<%= @the_comic_style.id %>">
+          Delete comic style
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_comic_style.user_id %>
+      </dd>
+
+      <dt>
+        Comedy style
+      </dt>
+      <dd>
+        <%= @the_comic_style.comedy_style_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_comic_style.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_comic_style.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit comic style
+    </h2>
+
+    <form action="/modify_comic_style/<%= @the_comic_style.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_comic_style.user_id %>">
+      </div>
+
+      <div>
+        <label for="comedy_style_id_box">
+          Comedy style
+        </label>
+
+        <input type="text" id="comedy_style_id_box" name="query_comedy_style_id" value="<%= @the_comic_style.comedy_style_id %>">
+      </div>
+
+      <button>
+        Update comic style
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -10,6 +10,22 @@
     <%= javascript_importmap_tags %>
   </head>
 
+  <nav>
+
+  <% if current_user != nil %>   
+  <div>
+  <a href="/users/sign_out"> Sign-out </a>
+  <div>
+  <a href="//users/edit"> Edit Profile </a>
+  <% else %>
+  <div>
+  <a href="/users/sign_up"> Sign-up </a>
+  <div>
+  <a href="/users/sign_in"> Sign-in </a>
+  <% end %>
+
+  </nav>
+
   <body>
     <%= yield %>
   </body>

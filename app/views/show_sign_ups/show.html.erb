@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Show sign up #<%= @the_show_sign_up.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/show_sign_ups">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_show_sign_up/<%= @the_show_sign_up.id %>">
+          Delete show sign up
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_show_sign_up.user_id %>
+      </dd>
+
+      <dt>
+        Show
+      </dt>
+      <dd>
+        <%= @the_show_sign_up.show_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_show_sign_up.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_show_sign_up.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit show sign up
+    </h2>
+
+    <form action="/modify_show_sign_up/<%= @the_show_sign_up.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_show_sign_up.user_id %>">
+      </div>
+
+      <div>
+        <label for="show_id_box">
+          Show
+        </label>
+
+        <input type="text" id="show_id_box" name="query_show_id" value="<%= @the_show_sign_up.show_id %>">
+      </div>
+
+      <button>
+        Update show sign up
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

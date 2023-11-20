@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all comic styles
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new comic style
+    </h2>
+
+    <form action="/insert_comic_style" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="comedy_style_id_box">
+          Comedy style
+        </label>
+
+        <input type="text" id="comedy_style_id_box" name="query_comedy_style_id">
+      </div>
+
+      <button>
+        Create comic style
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Comedy style
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_comic_styles.each do |a_comic_style| %>
+      <tr>
+        <td>
+          <%= a_comic_style.id %>
+        </td>
+
+        <td>
+          <%= a_comic_style.user_id %>
+        </td>
+
+        <td>
+          <%= a_comic_style.comedy_style_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_comic_style.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_comic_style.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/comic_styles/<%= a_comic_style.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

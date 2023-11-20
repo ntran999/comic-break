@@ -1,0 +1,71 @@
+<div>
+  <div>
+    <h1>
+      Comedy style #<%= @the_comedy_style.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/comedy_styles">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_comedy_style/<%= @the_comedy_style.id %>">
+          Delete comedy style
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Comedy style
+      </dt>
+      <dd>
+        <%= @the_comedy_style.comedy_style %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_comedy_style.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_comedy_style.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit comedy style
+    </h2>
+
+    <form action="/modify_comedy_style/<%= @the_comedy_style.id %>"  method="post" >
+      <div>
+        <label for="comedy_style_box">
+          Comedy style
+        </label>
+
+        <input type="text" id="comedy_style_box" name="query_comedy_style" value="<%= @the_comedy_style.comedy_style %>">
+      </div>
+
+      <button>
+        Update comedy style
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

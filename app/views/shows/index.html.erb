@@ -1,0 +1,262 @@
+<div>
+  <div>
+    <h1>
+      List of all shows
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new show
+    </h2>
+
+    <form action="/insert_show" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="time_box">
+          Time
+        </label>
+
+        <input type="time" id="time_box" name="query_time">
+      </div>
+
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="datetime-local" id="date_box" name="query_date">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="address_box">
+          Address
+        </label>
+
+        <textarea id="address_box" name="query_address" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label for="city_box">
+          City
+        </label>
+
+        <input type="text" id="city_box" name="query_city">
+      </div>
+
+      <div>
+        <label for="state_box">
+          State
+        </label>
+
+        <input type="text" id="state_box" name="query_state">
+      </div>
+
+      <div>
+        <label for="zip_box">
+          Zip
+        </label>
+
+        <input type="text" id="zip_box" name="query_zip">
+      </div>
+
+      <div>
+        <label for="google_api_address_box">
+          Google api address
+        </label>
+
+        <input type="text" id="google_api_address_box" name="query_google_api_address">
+      </div>
+
+      <div>
+        <label for="show_type_id_box">
+          Show type
+        </label>
+
+        <input type="text" id="show_type_id_box" name="query_show_type_id">
+      </div>
+
+      <div>
+        <label for="show_sign_ups_count_box">
+          Show sign ups count
+        </label>
+
+        <input type="text" id="show_sign_ups_count_box" name="query_show_sign_ups_count">
+      </div>
+
+      <button>
+        Create show
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Time
+        </th>
+
+        <th>
+          Date
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Address
+        </th>
+
+        <th>
+          City
+        </th>
+
+        <th>
+          State
+        </th>
+
+        <th>
+          Zip
+        </th>
+
+        <th>
+          Google api address
+        </th>
+
+        <th>
+          Show type
+        </th>
+
+        <th>
+          Show sign ups count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_shows.each do |a_show| %>
+      <tr>
+        <td>
+          <%= a_show.id %>
+        </td>
+
+        <td>
+          <%= a_show.user_id %>
+        </td>
+
+        <td>
+          <%= a_show.name %>
+        </td>
+
+        <td>
+          <%= a_show.time %>
+        </td>
+
+        <td>
+          <%= a_show.date %>
+        </td>
+
+        <td>
+          <%= a_show.description %>
+        </td>
+
+        <td>
+          <%= a_show.address %>
+        </td>
+
+        <td>
+          <%= a_show.city %>
+        </td>
+
+        <td>
+          <%= a_show.state %>
+        </td>
+
+        <td>
+          <%= a_show.zip %>
+        </td>
+
+        <td>
+          <%= a_show.google_api_address %>
+        </td>
+
+        <td>
+          <%= a_show.show_type_id %>
+        </td>
+
+        <td>
+          <%= a_show.show_sign_ups_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_show.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_show.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/shows/<%= a_show.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
