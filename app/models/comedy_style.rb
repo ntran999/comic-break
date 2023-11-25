@@ -8,4 +8,5 @@
 #  updated_at   :datetime         not null
 #
 class ComedyStyle < ApplicationRecord
+  has_many  :comic_styles, class_name: "ComicStyle", foreign_key: "comedy_style_id", dependent: :destroy
 end

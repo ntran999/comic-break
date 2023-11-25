@@ -15,28 +15,20 @@
     </h2>
 
     <form action="/insert_show" method="post">
+      
       <div>
-        <label for="user_id_box">
-          User
+        <label for="image_box">
+          Image
         </label>
 
-        <input type="text" id="user_id_box" name="query_user_id">
+        <input type="text" id="image_box" name="query_image">
       </div>
-
       <div>
         <label for="name_box">
           Name
         </label>
 
         <input type="text" id="name_box" name="query_name">
-      </div>
-
-      <div>
-        <label for="time_box">
-          Time
-        </label>
-
-        <input type="time" id="time_box" name="query_time">
       </div>
 
       <div>
@@ -88,27 +80,15 @@
       </div>
 
       <div>
-        <label for="google_api_address_box">
-          Google api address
-        </label>
-
-        <input type="text" id="google_api_address_box" name="query_google_api_address">
-      </div>
-
-      <div>
-        <label for="show_type_id_box">
+        <label for="show_type_name_box">
           Show type
         </label>
 
-        <input type="text" id="show_type_id_box" name="query_show_type_id">
-      </div>
-
-      <div>
-        <label for="show_sign_ups_count_box">
-          Show sign ups count
-        </label>
-
-        <input type="text" id="show_sign_ups_count_box" name="query_show_sign_ups_count">
+        <select id="show_type_name_box" name="query_show_type_name" <!--value="<%#= @the_show.show_type.name--> %>">
+        <% ShowType.all.each do |show_type| %>
+          <option value="<%= show_type.name %>"><%= show_type.name %></option>
+        <% end %>
+      </select>       
       </div>
 
       <button>
@@ -123,24 +103,32 @@
   <div>
     <table border="1">
       <tr>
-        <th>
+        <!--<th>
           ID
         </th>
 
         <th>
           User
+        </th>-->
+
+        <th>
+          Image
         </th>
 
         <th>
           Name
         </th>
 
-        <th>
+        <!--<th>
           Time
-        </th>
+        </th>-->
 
         <th>
           Date
+        </th>
+
+        <th>
+          Time
         </th>
 
         <th>
@@ -163,25 +151,25 @@
           Zip
         </th>
 
-        <th>
+        <!--<th>
           Google api address
-        </th>
+        </th>-->
 
         <th>
           Show type
         </th>
 
-        <th>
+        <!--<th>
           Show sign ups count
-        </th>
+        </th>-->
 
-        <th>
+       <!-- <th>
           Created at
         </th>
 
         <th>
           Updated at
-        </th>
+        </th>-->
 
         <th>
         </th>
@@ -190,11 +178,7 @@
       <% @list_of_shows.each do |a_show| %>
       <tr>
         <td>
-          <%= a_show.id %>
-        </td>
-
-        <td>
-          <%= a_show.user_id %>
+          <img src="<%= a_show.image%>" style = "width:250px;">
         </td>
 
         <td>
@@ -202,11 +186,11 @@
         </td>
 
         <td>
-          <%= a_show.time %>
+          <%= a_show.date.strftime('%b %d, %Y') %>
         </td>
 
         <td>
-          <%= a_show.date %>
+          <%= a_show.date.strftime('%I:%M %p') %>
         </td>
 
         <td>
@@ -230,22 +214,7 @@
         </td>
 
         <td>
-          <%= a_show.google_api_address %>
-        </td>
-
-        <td>
-          <%= a_show.show_type_id %>
-        </td>
-
-        <td>
-          <%= a_show.show_sign_ups_count %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_show.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_show.updated_at) %> ago
+          <%= a_show.show_type.name %>
         </td>
 
         <td>

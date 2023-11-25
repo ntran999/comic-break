@@ -19,11 +19,17 @@
     </div>
 
     <dl>
-      <dt>
+      <!--<dt>
         User
       </dt>
       <dd>
-        <%= @the_show.user_id %>
+        <%#= @the_show.user_id %>-->
+<!--      </dd>-->
+      <dt>
+        
+      </dt>
+      <dd>
+        <img src="<%= @the_show.image%>" style = "width:250px;">
       </dd>
 
       <dt>
@@ -34,17 +40,17 @@
       </dd>
 
       <dt>
-        Time
-      </dt>
-      <dd>
-        <%= @the_show.time %>
-      </dd>
-
-      <dt>
         Date
       </dt>
       <dd>
-        <%= @the_show.date %>
+        <%= @the_show.date.strftime('%b %d, %Y') %>
+      </dd>
+
+      <dt>
+        Time
+      </dt>
+      <dd>
+        <%= @the_show.date.strftime('%I:%M %p') %>
       </dd>
 
       <dt>
@@ -82,40 +88,40 @@
         <%= @the_show.zip %>
       </dd>
 
-      <dt>
+      <!--<dt>
         Google api address
       </dt>
       <dd>
-        <%= @the_show.google_api_address %>
-      </dd>
+        <%#= @the_show.google_api_address %>-->
+<!--      </dd>-->
 
       <dt>
         Show type
       </dt>
       <dd>
-        <%= @the_show.show_type_id %>
+        <%= @the_show.show_type.name %>
       </dd>
 
-      <dt>
+     <!-- <dt>
         Show sign ups count
       </dt>
       <dd>
-        <%= @the_show.show_sign_ups_count %>
-      </dd>
+        <%#= @the_show.show_sign_ups_count %>-->
+<!--      </dd>-->
 
-      <dt>
+      <!--<dt>
         Created at
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_show.created_at) %> ago
-      </dd>
+        <%#= time_ago_in_words(@the_show.created_at) %> ago-->
+<!--      </dd>
 
       <dt>
         Updated at
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_show.updated_at) %> ago
-      </dd>
+        <%#= time_ago_in_words(@the_show.updated_at) %> ago-->
+<!--      </dd>-->
     </dl>
   </div>
 </div>
@@ -130,13 +136,15 @@
     </h2>
 
     <form action="/modify_show/<%= @the_show.id %>"  method="post" >
+      
       <div>
-        <label for="user_id_box">
-          User
+        <label for="image_box">
+          Image
         </label>
 
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_show.user_id %>">
+        <input type="text" id="image_box" name="query_image" value="<%= @the_show.image %>">
       </div>
+
 
       <div>
         <label for="name_box">
@@ -146,13 +154,13 @@
         <input type="text" id="name_box" name="query_name" value="<%= @the_show.name %>">
       </div>
 
-      <div>
+      <!--<div>
         <label for="time_box">
           Time
         </label>
 
-        <input type="time" id="time_box" name="query_time" value="<%= @the_show.time %>">
-      </div>
+        <input type="time" id="time_box" name="query_time" value="<%#= @the_show.date.strftime('%H:%M') %>">
+      </div>-->
 
       <div>
         <label for="date_box">
@@ -160,7 +168,7 @@
         </label>
 
         <input type="datetime-local" id="date_box" name="query_date"
-         value="<%= @the_show.date %>">
+         value="<%= @the_show.date.strftime('%Y-%m-%dT%H:%M') %>">
       </div>
 
       <div>
@@ -203,29 +211,35 @@
         <input type="text" id="zip_box" name="query_zip" value="<%= @the_show.zip %>">
       </div>
 
-      <div>
+      <!--<div>
         <label for="google_api_address_box">
           Google api address
         </label>
 
-        <input type="text" id="google_api_address_box" name="query_google_api_address" value="<%= @the_show.google_api_address %>">
-      </div>
+        <input type="text" id="google_api_address_box" name="query_google_api_address" value="<%#= @the_show.google_api_address %>">
+      </div>-->
 
       <div>
         <label for="show_type_id_box">
           Show type
         </label>
 
-        <input type="text" id="show_type_id_box" name="query_show_type_id" value="<%= @the_show.show_type_id %>">
+      <select id="show_type_id_box" name="query_show_type_name" value="<%= @the_show.show_type.name %>">
+        <% ShowType.all.each do |show_type| %>
+          <option value="<%= show_type.name %>"><%= show_type.name %></option>
+        <% end %>
+      </select>  
+
+        <!--<input type="text" id="show_type_id_box" name="query_show_type_id" value="<%#= @the_show.show_type_id %>">-->
       </div>
 
-      <div>
+      <!--<div>
         <label for="show_sign_ups_count_box">
           Show sign ups count
         </label>
 
-        <input type="text" id="show_sign_ups_count_box" name="query_show_sign_ups_count" value="<%= @the_show.show_sign_ups_count %>">
-      </div>
+        <input type="text" id="show_sign_ups_count_box" name="query_show_sign_ups_count" value="<%#= @the_show.show_sign_ups_count %>">
+      </div>-->
 
       <button>
         Update show

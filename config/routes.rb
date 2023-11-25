@@ -4,20 +4,20 @@ Rails.application.routes.draw do
 
   root "shows#index"
 
-  # CREATE
-  post("/insert_show_type", { :controller => "show_types", :action => "create" })
+  # # CREATE
+  # post("/insert_show_type", { :controller => "show_types", :action => "create" })
           
-  # READ
-  get("/show_types", { :controller => "show_types", :action => "index" })
+  # # READ
+  # get("/show_types", { :controller => "show_types", :action => "index" })
   
-  get("/show_types/:path_id", { :controller => "show_types", :action => "show" })
+  # get("/show_types/:path_id", { :controller => "show_types", :action => "show" })
   
-  # UPDATE
+  # # UPDATE
   
-  post("/modify_show_type/:path_id", { :controller => "show_types", :action => "update" })
+  # post("/modify_show_type/:path_id", { :controller => "show_types", :action => "update" })
   
-  # DELETE
-  get("/delete_show_type/:path_id", { :controller => "show_types", :action => "destroy" })
+  # # DELETE
+  # get("/delete_show_type/:path_id", { :controller => "show_types", :action => "destroy" })
 
   #------------------------------
 
@@ -42,39 +42,39 @@ Rails.application.routes.draw do
 
   # Routes for the Comic style resource:
 
-  # CREATE
-  post("/insert_comic_style", { :controller => "comic_styles", :action => "create" })
+  # # CREATE
+  # post("/insert_comic_style", { :controller => "comic_styles", :action => "create" })
           
-  # READ
-  get("/comic_styles", { :controller => "comic_styles", :action => "index" })
+  # # READ
+  # get("/comic_styles", { :controller => "comic_styles", :action => "index" })
   
-  get("/comic_styles/:path_id", { :controller => "comic_styles", :action => "show" })
+  # get("/comic_styles/:path_id", { :controller => "comic_styles", :action => "show" })
   
-  # UPDATE
+  # # UPDATE
   
-  post("/modify_comic_style/:path_id", { :controller => "comic_styles", :action => "update" })
+  # post("/modify_comic_style/:path_id", { :controller => "comic_styles", :action => "update" })
   
-  # DELETE
-  get("/delete_comic_style/:path_id", { :controller => "comic_styles", :action => "destroy" })
+  # # DELETE
+  # get("/delete_comic_style/:path_id", { :controller => "comic_styles", :action => "destroy" })
 
   #------------------------------
 
   # Routes for the Comedy style resource:
 
-  # CREATE
-  post("/insert_comedy_style", { :controller => "comedy_styles", :action => "create" })
+  # # CREATE
+  # post("/insert_comedy_style", { :controller => "comedy_styles", :action => "create" })
           
-  # READ
-  get("/comedy_styles", { :controller => "comedy_styles", :action => "index" })
+  # # READ
+  # get("/comedy_styles", { :controller => "comedy_styles", :action => "index" })
   
-  get("/comedy_styles/:path_id", { :controller => "comedy_styles", :action => "show" })
+  # get("/comedy_styles/:path_id", { :controller => "comedy_styles", :action => "show" })
   
-  # UPDATE
+  # # UPDATE
   
-  post("/modify_comedy_style/:path_id", { :controller => "comedy_styles", :action => "update" })
+  # post("/modify_comedy_style/:path_id", { :controller => "comedy_styles", :action => "update" })
   
-  # DELETE
-  get("/delete_comedy_style/:path_id", { :controller => "comedy_styles", :action => "destroy" })
+  # # DELETE
+  # get("/delete_comedy_style/:path_id", { :controller => "comedy_styles", :action => "destroy" })
 
   #------------------------------
 
