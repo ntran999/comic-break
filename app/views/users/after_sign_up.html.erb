@@ -28,40 +28,40 @@
 
   <!-- Form for Comedian -->
   <div id="comedianForm" class="hidden roleForm">
-    <form action="/insert_show_type" method="post">
+    <form action="/users/comedian_profile" method="post">
       <div>
         <label for="comedian_name_box">
           Comedian Name
         </label>
-        <input type="text" id="comedian_name_box" name="comedian_name" value="<%= @the_user.name%>">
+        <input type="text" id="comedian_name_box" name="query_comedian_name" value="<%= @the_user.name%>">
       </div>
 
       <div>
         <label for="comedian_bio_box">
           Comedian Bio
         </label>
-        <textarea id="comedian_bio_box" name="comedian_bio"></textarea>
+        <textarea id="comedian_bio_box" name="query_comedian_bio"></textarea>
       </div>
 
       <div>
         <label for="comedian_short_bio_box">
           Comedian Short Bio (150 characters)
         </label>
-        <textarea id="comedian_short_bio_box" name="comedian_short_bio" maxlength="150"></textarea>
+        <textarea id="comedian_short_bio_box" name="query_comedian_short_bio" maxlength="150"></textarea>
       </div>
 
       <div>
         <label for="comedian_city_box">
           City
         </label>
-        <input type="text" id="comedian_city_box" name="comedian_city">
+        <input type="text" id="comedian_city_box" name="query_city">
       </div>
 
       <div>
         <label for="comedian_state_box">
           State
         </label>
-        <input type="text" id="comedian_state_box" name="comedian_state">
+        <input type="text" id="comedian_state_box" name="query_state">
       </div>
 
       <button>
@@ -72,33 +72,33 @@
 
   <!-- Form for Producer -->
   <div id="producerForm" class="hidden roleForm">
-    <form action="/insert_show_type" method="post">
+    <form action="/users/producer_profile" method="post">
       <div>
         <label for="producer_name_box">
           Producer Name
         </label>
-        <input type="text" id="producer_name_box" name="producer_name" value="<%= @the_user.name%>">
+        <input type="text" id="producer_name_box" name="query_producer_name" value="<%= @the_user.name%>">
       </div>
 
       <div>
         <label for="producer_bio_box">
           Producer Bio
         </label>
-        <textarea id="producer_bio_box" name="producer_bio"></textarea>
+        <textarea id="producer_bio_box" name="query_producer_bio"></textarea>
       </div>
 
       <div>
         <label for="producer_city_box">
           City
         </label>
-        <input type="text" id="producer_city_box" name="producer_city">
+        <input type="text" id="producer_city_box" name="query_city">
       </div>
 
       <div>
         <label for="producer_state_box">
           State
         </label>
-        <input type="text" id="producer_state_box" name="producer_state">
+        <input type="text" id="producer_state_box" name="query_state">
       </div>
 
       <button>
@@ -109,54 +109,54 @@
 
   <!-- Form for Both Comedian and Producer -->
   <div id="bothForm" class="hidden roleForm">
-    <form action="/insert_show_type" method="post">
+    <form action="/users/comedian_producer_profile" method="post">
 <div>
         <label for="comedian_name_box">
           Comedian Name
         </label>
-        <input type="text" id="comedian_name_box" name="comedian_name" value="<%= @the_user.name%>">
+        <input type="text" id="comedian_name_box" name="query_comedian_name" value="<%= @the_user.name%>">
       </div>
 
       <div>
         <label for="comedian_bio_box">
           Comedian Bio
         </label>
-        <textarea id="comedian_bio_box" name="comedian_bio"></textarea>
+        <textarea id="comedian_bio_box" name="query_comedian_bio"></textarea>
       </div>
 
       <div>
         <label for="comedian_short_bio_box">
           Comedian Short Bio (150 characters)
         </label>
-        <textarea id="comedian_short_bio_box" name="comedian_short_bio" maxlength="150"></textarea>
+        <textarea id="comedian_short_bio_box" name="query_comedian_short_bio" maxlength="150"></textarea>
       </div>
 
       <div>
       <label for="producer_name_box">
           Producer Name
         </label>
-        <input type="text" id="producer_name_box" name="producer_name" value="<%= @the_user.name%>">
+        <input type="text" id="producer_name_box" name="query_producer_name" value="<%= @the_user.name%>">
       </div>
 
       <div>
         <label for="producer_bio_box">
           Producer Bio
         </label>
-        <textarea id="producer_bio_box" name="producer_bio"></textarea>
+        <textarea id="producer_bio_box" name="query_producer_bio"></textarea>
       </div>
 
       <div>
         <label for="comedian_city_box">
           City
         </label>
-        <input type="text" id="comedian_city_box" name="comedian_city">
+        <input type="text" id="comedian_city_box" name="query_city">
       </div>
 
       <div>
         <label for="comedian_state_box">
           State
         </label>
-        <input type="text" id="comedian_state_box" name="comedian_state">
+        <input type="text" id="comedian_state_box" name="query_state">
       </div>
 
       <button>

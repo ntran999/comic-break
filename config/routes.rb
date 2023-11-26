@@ -11,6 +11,11 @@ Rails.application.routes.draw do
 
   get("/users/after_sign_up", { :controller => "users", :action => "after_sign_up" })
 
+  post("/users/comedian_profile", { :controller => "users", :action => "update_comedian" })
+
+  post("/users/producer_profile", { :controller => "users", :action => "update_producer" })
+
+  post("/users/comedian_producer_profile", { :controller => "users", :action => "update_both" })
 
   # Routes for the Show type resource:
 
