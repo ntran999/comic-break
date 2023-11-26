@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   
   get("/comedians/:path_id", { :controller => "users", :action => "show" })
 
-  get("/users/after_sign_up", { :controller => "users", :action => "after_sign_up" })
+  get("/users/new_profile", { :controller => "users", :action => "new_profile" })
+
+  post("/users/save_new_profile", { :controller => "users", :action => "save_new_profile" })
+
+  get("/users/new_role", { :controller => "users", :action => "new_role" })
 
   post("/users/comedian_profile", { :controller => "users", :action => "update_comedian" })
 

@@ -4,7 +4,6 @@
 }
 </style>
 
-
 <div>
   <div>
     <fieldset>
@@ -27,7 +26,10 @@
   </div>
 
   <!-- Form for Comedian -->
+  
   <div id="comedianForm" class="hidden roleForm">
+  <fieldset>
+      <legend><h3>Comedian Profile</h3></legend>
     <form action="/users/comedian_profile" method="post">
       <div>
         <label for="comedian_name_box">
@@ -51,27 +53,27 @@
       </div>
 
       <div>
-        <label for="comedian_city_box">
-          City
+        <label for="comedian_style">
+        Comedian Style (choose all that applied)
         </label>
-        <input type="text" id="comedian_city_box" name="query_city">
-      </div>
-
-      <div>
-        <label for="comedian_state_box">
-          State
-        </label>
-        <input type="text" id="comedian_state_box" name="query_state">
-      </div>
+        <select id="show_type_id_box" name="query_show_type_name" value="<%= @the_show.show_type.name %>">
+        <% ShowType.all.each do |show_type| %>
+          <option value="<%= show_type.name %>"><%= show_type.name %></option>
+        <% end %>
+      </select> 
 
       <button>
         Create comedian bio
       </button>
     </form>
+  </fieldset>
   </div>
+  
 
   <!-- Form for Producer -->
   <div id="producerForm" class="hidden roleForm">
+  <fieldset>
+      <legend><h3>Producer Profile</h3></legend>
     <form action="/users/producer_profile" method="post">
       <div>
         <label for="producer_name_box">
@@ -87,28 +89,17 @@
         <textarea id="producer_bio_box" name="query_producer_bio"></textarea>
       </div>
 
-      <div>
-        <label for="producer_city_box">
-          City
-        </label>
-        <input type="text" id="producer_city_box" name="query_city">
-      </div>
-
-      <div>
-        <label for="producer_state_box">
-          State
-        </label>
-        <input type="text" id="producer_state_box" name="query_state">
-      </div>
-
       <button>
         Create producer bio
       </button>
     </form>
+  </fieldset>
   </div>
 
   <!-- Form for Both Comedian and Producer -->
   <div id="bothForm" class="hidden roleForm">
+  <fieldset>
+      <legend><h3>Comedian and Producer Profiles</h3></legend>
     <form action="/users/comedian_producer_profile" method="post">
 <div>
         <label for="comedian_name_box">
@@ -145,24 +136,11 @@
         <textarea id="producer_bio_box" name="query_producer_bio"></textarea>
       </div>
 
-      <div>
-        <label for="comedian_city_box">
-          City
-        </label>
-        <input type="text" id="comedian_city_box" name="query_city">
-      </div>
-
-      <div>
-        <label for="comedian_state_box">
-          State
-        </label>
-        <input type="text" id="comedian_state_box" name="query_state">
-      </div>
-
       <button>
         Create comedian and producer bio
       </button>
     </form>
+    </fieldset>
   </div>
 
 <script>

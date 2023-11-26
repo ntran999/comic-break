@@ -1,0 +1,40 @@
+<style>
+.hidden {
+  display: none;
+}
+</style>
+
+<h2> Create Your Profile </h2>
+
+  <!-- Form for New Profile -->
+  <div >
+    <form action="/users/save_new_profile" method="post">
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      
+      <div>
+        <label for="city_box">
+          City
+        </label>
+        <input type="text" id="city_box" name="query_city">
+      </div>
+
+      <div>
+        <label for="state_box">
+          State
+        </label>
+        <input type="text" id="state_box" name="query_state">
+      </div>
+
+      <button>
+        Create profile
+      </button>
+    </form>
+  </div>
+
+  
