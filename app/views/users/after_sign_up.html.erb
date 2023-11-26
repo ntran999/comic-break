@@ -1,0 +1,193 @@
+<style>
+.hidden {
+  display: none;
+}
+</style>
+
+
+<div>
+  <div>
+    <fieldset>
+      <legend><h3>Choose role(s) you want to sign up for:</h3></legend>
+      <div>
+        <input type="radio" id="comedian" name="role" value="comedian" />
+        <label for="comedian">Comedian</label>
+      </div>
+
+      <div>
+        <input type="radio" id="producer" name="role" value="producer" />
+        <label for="producer">Producer</label>
+      </div>
+
+      <div>
+        <input type="radio" id="both" name="role" value="both" />
+        <label for="both">Both Comedian and Producer</label>
+      </div>
+    </fieldset>
+  </div>
+
+  <!-- Form for Comedian -->
+  <div id="comedianForm" class="hidden roleForm">
+    <form action="/insert_show_type" method="post">
+      <div>
+        <label for="comedian_name_box">
+          Comedian Name
+        </label>
+        <input type="text" id="comedian_name_box" name="comedian_name" value="<%= @the_user.name%>">
+      </div>
+
+      <div>
+        <label for="comedian_bio_box">
+          Comedian Bio
+        </label>
+        <textarea id="comedian_bio_box" name="comedian_bio"></textarea>
+      </div>
+
+      <div>
+        <label for="comedian_short_bio_box">
+          Comedian Short Bio (150 characters)
+        </label>
+        <textarea id="comedian_short_bio_box" name="comedian_short_bio" maxlength="150"></textarea>
+      </div>
+
+      <div>
+        <label for="comedian_city_box">
+          City
+        </label>
+        <input type="text" id="comedian_city_box" name="comedian_city">
+      </div>
+
+      <div>
+        <label for="comedian_state_box">
+          State
+        </label>
+        <input type="text" id="comedian_state_box" name="comedian_state">
+      </div>
+
+      <button>
+        Create comedian bio
+      </button>
+    </form>
+  </div>
+
+  <!-- Form for Producer -->
+  <div id="producerForm" class="hidden roleForm">
+    <form action="/insert_show_type" method="post">
+      <div>
+        <label for="producer_name_box">
+          Producer Name
+        </label>
+        <input type="text" id="producer_name_box" name="producer_name" value="<%= @the_user.name%>">
+      </div>
+
+      <div>
+        <label for="producer_bio_box">
+          Producer Bio
+        </label>
+        <textarea id="producer_bio_box" name="producer_bio"></textarea>
+      </div>
+
+      <div>
+        <label for="producer_city_box">
+          City
+        </label>
+        <input type="text" id="producer_city_box" name="producer_city">
+      </div>
+
+      <div>
+        <label for="producer_state_box">
+          State
+        </label>
+        <input type="text" id="producer_state_box" name="producer_state">
+      </div>
+
+      <button>
+        Create producer bio
+      </button>
+    </form>
+  </div>
+
+  <!-- Form for Both Comedian and Producer -->
+  <div id="bothForm" class="hidden roleForm">
+    <form action="/insert_show_type" method="post">
+<div>
+        <label for="comedian_name_box">
+          Comedian Name
+        </label>
+        <input type="text" id="comedian_name_box" name="comedian_name" value="<%= @the_user.name%>">
+      </div>
+
+      <div>
+        <label for="comedian_bio_box">
+          Comedian Bio
+        </label>
+        <textarea id="comedian_bio_box" name="comedian_bio"></textarea>
+      </div>
+
+      <div>
+        <label for="comedian_short_bio_box">
+          Comedian Short Bio (150 characters)
+        </label>
+        <textarea id="comedian_short_bio_box" name="comedian_short_bio" maxlength="150"></textarea>
+      </div>
+
+      <div>
+      <label for="producer_name_box">
+          Producer Name
+        </label>
+        <input type="text" id="producer_name_box" name="producer_name" value="<%= @the_user.name%>">
+      </div>
+
+      <div>
+        <label for="producer_bio_box">
+          Producer Bio
+        </label>
+        <textarea id="producer_bio_box" name="producer_bio"></textarea>
+      </div>
+
+      <div>
+        <label for="comedian_city_box">
+          City
+        </label>
+        <input type="text" id="comedian_city_box" name="comedian_city">
+      </div>
+
+      <div>
+        <label for="comedian_state_box">
+          State
+        </label>
+        <input type="text" id="comedian_state_box" name="comedian_state">
+      </div>
+
+      <button>
+        Create comedian and producer bio
+      </button>
+    </form>
+  </div>
+
+<script>
+  document.querySelectorAll('input[name="role"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      // Hide all forms
+      document.querySelectorAll('.roleForm').forEach(function(form) {
+        form.classList.add('hidden');
+      });
+
+      // Show the selected form or both forms
+      var selectedRole = this.value;
+      if (selectedRole === 'comedian') {
+        document.getElementById('comedianForm').classList.remove('hidden');
+        document.getElementById('producerForm').classList.add('hidden');
+        document.getElementById('bothForm').classList.add('hidden');
+      } else if (selectedRole === 'producer') {
+        document.getElementById('comedianForm').classList.add('hidden');
+        document.getElementById('producerForm').classList.remove('hidden');
+        document.getElementById('bothForm').classList.add('hidden');
+      } else {
+        document.getElementById('comedianForm').classList.add('hidden');
+        document.getElementById('producerForm').classList.add('hidden');
+        document.getElementById('bothForm').classList.remove('hidden');
+      }
+    });
+  });
+</script>

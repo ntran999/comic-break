@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+  registrations: 'users/registrations'
+}
   # Routes for the User resource:
 
   # # READ
   get("/comedians", { :controller => "users", :action => "index" })
   
   get("/comedians/:path_id", { :controller => "users", :action => "show" })
+
+  get("/users/after_sign_up", { :controller => "users", :action => "after_sign_up" })
 
 
   # Routes for the Show type resource:

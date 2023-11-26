@@ -33,8 +33,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :city, presence: true
-  validates :state, presence: true
   validates :short_comedian_bio, length: { maximum: 150 }
 
 has_many  :show_sign_ups, class_name: "ShowSignUp", foreign_key: "user_id", dependent: :destroy
