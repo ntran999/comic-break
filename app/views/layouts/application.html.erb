@@ -11,12 +11,27 @@
   </head>
 
   <nav>
+  <div>
+  <a href="/comedians"> Comedians </a>
+  </div>
+  <div>
+  <a href="/producers"> Producers </a>
+  </div>
+  <div>
+  <a href="/shows"> Shows </a>
+  </div>
+
+  <hr>
+
 
   <% if current_user != nil %>   
   <div>
   <a href="/users/sign_out"> Sign-out </a>
   <div>
-  <a href="/users/edit"> Edit Profile </a>
+  <a href="/users/edit"> Account Setting </a>
+  <div>
+  <a href="/users/profile"> Profile Setting - TO DO </a>
+
   <% else %>
   <!--<div>
   <a href="/users/sign_up"> Sign-up </a>-->

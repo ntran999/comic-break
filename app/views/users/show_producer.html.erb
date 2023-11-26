@@ -1,0 +1,45 @@
+<div>
+  <div>
+    <h1>
+      <%= @the_user.name %>
+    </h1>
+
+    <div>
+      <div>
+        <a href="/producers">
+          Go back
+        </a>
+      </div>
+
+    </div>
+
+    <dl>
+      
+      <dd>
+        <img src="<%= @the_user.producer_profile_pic %>" style = "width:250px;">
+      </dd>
+
+      <dt>
+        Bio
+      </dt>
+      <dd>
+        <%= @the_user.producer_bio %>
+      </dd>
+
+      <dt>
+        Location
+      </dt>
+      <dd>
+        <%= @the_user.city %>, <%= @the_user.state %>
+      </dd>
+
+  </div>
+</div>
+
+<hr>
+Shows
+
+
+
+
+<hr>

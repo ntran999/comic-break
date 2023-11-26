@@ -54,13 +54,17 @@
 
       <div>
         <label for="comedian_style">
-        Comedian Style (choose all that applied)
+          Comedian Style (choose all that applied)
         </label>
-        <select id="show_type_id_box" name="query_show_type_name" value="<%= @the_show.show_type.name %>">
-        <% ShowType.all.each do |show_type| %>
-          <option value="<%= show_type.name %>"><%= show_type.name %></option>
-        <% end %>
-      </select> 
+        <div id="comedy_style_checkboxes">
+          <% ComedyStyle.all.each do |comedy_style| %>
+            <label>
+              <%= check_box_tag "query_comedy_style[]", comedy_style.id %>
+              <%= comedy_style.name %>
+            </label><br>
+          <% end %>
+        </div>
+      </div>
 
       <button>
         Create comedian bio
@@ -120,6 +124,20 @@
           Comedian Short Bio (150 characters)
         </label>
         <textarea id="comedian_short_bio_box" name="query_comedian_short_bio" maxlength="150"></textarea>
+      </div>
+
+      <div>
+        <label for="comedian_style">
+          Comedian Style (choose all that applied)
+        </label>
+        <div id="comedy_style_checkboxes">
+          <% ComedyStyle.all.each do |comedy_style| %>
+            <label>
+              <%= check_box_tag "query_comedy_style[]", comedy_style.id %>
+              <%= comedy_style.name %>
+            </label><br>
+          <% end %>
+        </div>
       </div>
 
       <div>

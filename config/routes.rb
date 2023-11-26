@@ -5,9 +5,13 @@ Rails.application.routes.draw do
   # Routes for the User resource:
 
   # # READ
-  get("/comedians", { :controller => "users", :action => "index" })
+  get("/comedians", { :controller => "users", :action => "index_comedian" })
   
-  get("/comedians/:path_id", { :controller => "users", :action => "show" })
+  get("/comedians/:path_id", { :controller => "users", :action => "show_comedian" })
+
+  get("/producers", { :controller => "users", :action => "index_producer" })
+  
+  get("/producers/:path_id", { :controller => "users", :action => "show_producer" })
 
   get("/users/new_profile", { :controller => "users", :action => "new_profile" })
 

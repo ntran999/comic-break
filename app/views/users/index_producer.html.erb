@@ -1,0 +1,67 @@
+<div>
+  <div>
+    <h1>
+      List of all producers
+    </h1>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Location
+        </th>
+
+        <th>
+          Bio
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_users.each do |a_user| %>
+      <tr>
+        <td>
+          <img src="<%= a_user.producer_profile_pic%>" style = "width:250px;">
+        </td>
+
+        <td>
+          <%= a_user.producer_name %>
+        </td>
+
+
+        <td>
+          <%= a_user.city %>, <%= a_user.state %>
+        </td>
+
+        <td>
+          <%= truncate(a_user.producer_bio, length: 100, separator: ' ', omission: '...') %>
+        </td>
+
+        <td>
+          <a href="/producers/<%= a_user.name %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+
