@@ -3,12 +3,12 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  city                   :string
 #  comedian_bio           :string
 #  comedian_name          :string
 #  comedian_profile_pic   :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  location               :string
 #  name                   :string
 #  producer_bio           :string
 #  producer_name          :string
@@ -16,8 +16,10 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  short_comedian_bio     :text
 #  show_sign_ups_count    :integer
 #  shows_count            :integer
+#  state                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -31,6 +33,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :short_comedian_bio, length: { maximum: 150 }
 
 has_many  :show_sign_ups, class_name: "ShowSignUp", foreign_key: "user_id", dependent: :destroy
 has_many  :shows, class_name: "Show", foreign_key: "user_id", dependent: :destroy

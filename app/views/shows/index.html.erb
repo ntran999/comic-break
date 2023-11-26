@@ -41,7 +41,7 @@
 
       <div>
         <label for="description_box">
-          Description
+          About The Show
         </label>
 
         <textarea id="description_box" name="query_description" rows="3"></textarea>
@@ -132,10 +132,14 @@
         </th>
 
         <th>
-          Description
+          Venue 
         </th>
 
-        <th>
+       <!-- <th>
+          About The Show
+        </th>    -->  
+
+        <!--<th>
           Address
         </th>
 
@@ -149,7 +153,7 @@
 
         <th>
           Zip
-        </th>
+        </th>-->
 
         <!--<th>
           Google api address
@@ -194,25 +198,29 @@
         </td>
 
         <td>
-          <%= a_show.description %>
+          <%= a_show.venue_name %>
         </td>
+
+        <!--<td>-->
+          <%#= a_show.description %>
+<!--        </td>-->
+
+        <!--<td>-->
+          <%#= a_show.address %>
+<!--        </td>
 
         <td>
-          <%= a_show.address %>
-        </td>
+          <%#= a_show.city %>-->
+<!--        </td>
 
         <td>
-          <%= a_show.city %>
-        </td>
+          <%#= a_show.state %>-->
+<!--        </td>
 
         <td>
-          <%= a_show.state %>
-        </td>
-
-        <td>
-          <%= a_show.zip %>
-        </td>
-
+          <%#= a_show.zip %>-->
+<!--        </td>
+-->
         <td>
           <%= a_show.show_type.name %>
         </td>

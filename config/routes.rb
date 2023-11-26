@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
+  # Routes for the User resource:
+
+  # # READ
+  get("/comedians", { :controller => "users", :action => "index" })
+  
+  get("/comedians/:path_id", { :controller => "users", :action => "show" })
+
+
   # Routes for the Show type resource:
 
   root "shows#index"

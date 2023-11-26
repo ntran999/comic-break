@@ -54,38 +54,24 @@
       </dd>
 
       <dt>
-        Description
+        About The Show
       </dt>
       <dd>
         <%= @the_show.description %>
       </dd>
 
       <dt>
+        Venue
+      </dt>
+      <dd>
+        <%= @the_show.venue_name %>
+      </dd>
+
+      <dt>
         Address
       </dt>
       <dd>
-        <%= @the_show.address %>
-      </dd>
-
-      <dt>
-        City
-      </dt>
-      <dd>
-        <%= @the_show.city %>
-      </dd>
-
-      <dt>
-        State
-      </dt>
-      <dd>
-        <%= @the_show.state %>
-      </dd>
-
-      <dt>
-        Zip
-      </dt>
-      <dd>
-        <%= @the_show.zip %>
+        <%= @the_show.address %>, <%= @the_show.city %>, <%= @the_show.state %>, <%= @the_show.zip %>
       </dd>
 
       <!--<dt>
@@ -128,6 +114,25 @@
 
 <hr>
 
+<% if current_user != nil%>
+<div>
+ <a href="/shows">
+ Sign up
+ </a>
+</div>
+
+<div>
+ <a href="/shows">
+ Bookmark
+ </a>
+</div>
+<% else %>
+
+<p> You have to <a href="">sign in</a> to sign up and bookmark the show! <p>
+
+<% end %>
+
+<hr>
 
 <div>
   <div>

@@ -13,6 +13,7 @@
 #  show_sign_ups_count :integer
 #  state               :string
 #  time                :time
+#  venue_name          :string
 #  zip                 :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null

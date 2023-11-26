@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_20_210710) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_26_002519) do
   create_table "comedy_styles", force: :cascade do |t|
     t.string "comedy_style"
     t.datetime "created_at", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_210710) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
+    t.string "venue_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,7 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_210710) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
-    t.string "location"
     t.string "comedian_name"
     t.string "comedian_bio"
     t.string "producer_name"
@@ -81,6 +81,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_210710) do
     t.integer "shows_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "city"
+    t.string "state"
+    t.text "short_comedian_bio"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
