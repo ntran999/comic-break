@@ -39,5 +39,22 @@ has_many  :show_sign_ups, class_name: "ShowSignUp", foreign_key: "user_id", depe
 has_many  :shows, class_name: "Show", foreign_key: "user_id", dependent: :destroy
 has_many  :comic_styles, class_name: "ComicStyle", foreign_key: "user_id", dependent: :destroy
 has_many  :favorite_shows, class_name: "FavoriteShow", foreign_key: "user_id", dependent: :destroy
-         
+
+
+def is_comedian?
+  comedian_name.present?
+end 
+
+def is_producer?
+  producer_name.present?
+end
+
+def is_not_comedian?
+  !is_comedian?
+end
+
+def is_not_producer?
+  !is_producer?
+end
+
 end

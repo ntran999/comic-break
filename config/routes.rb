@@ -106,7 +106,7 @@ Rails.application.routes.draw do
   # Routes for the Show sign up resource:
 
   # CREATE
-  post("/insert_show_sign_up", { :controller => "show_sign_ups", :action => "create" })
+  post("/insert_show_sign_up/:path_id", { :controller => "show_sign_ups", :action => "create" })
           
   # READ
   get("/show_sign_ups", { :controller => "show_sign_ups", :action => "index" })

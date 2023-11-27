@@ -18,15 +18,21 @@ class ShowSignUpsController < ApplicationController
   end
 
   def create
+    if current_user.comedian_name != nil
     the_show_sign_up = ShowSignUp.new
-    the_show_sign_up.user_id = params.fetch("query_user_id")
-    the_show_sign_up.show_id = params.fetch("query_show_id")
+    the_show_sign_up.user_id = current_user.id
+    show_id = params.fetch("path_id")
+    the_show_sign_up.show_id = show_id
 
-    if the_show_sign_up.valid?
-      the_show_sign_up.save
-      redirect_to("/show_sign_ups", { :notice => "Show sign up created successfully." })
-    else
-      redirect_to("/show_sign_ups", { :alert => the_show_sign_up.errors.full_messages.to_sentence })
+      if the_show_sign_up.valid?
+        the_show_sign_up.save
+        redirect_to("/shows/#{show_id}", { :notice => "You have signed up to this show successfully." })
+      else
+        redirect_to("/shows/#{show_id}", { :alert => the_show_sign_up.errors.full_messages.to_sentence })
+      end
+    else 
+      show_id = params.fetch("path_id")
+      redirect_to("/shows/#{show_id}")
     end
   end
 

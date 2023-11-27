@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show_comedian
-    the_name = params.fetch("path_id")
+    the_name = params.fetch("path_id").gsub('_', ' ')
 
     matching_users = User.where({ :name => the_name })
 
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def show_producer
-    the_name = params.fetch("path_id")
+    the_name = params.fetch("path_id").gsub('_', ' ')
 
     matching_users = User.where({ :name => the_name })
 
@@ -65,11 +65,11 @@ class UsersController < ApplicationController
 
 
   def new_role
-    if current_user != nil && (current_user.comedian_name.blank? && current_user.producer_name.blank?)
+    if current_user != nil && (current_user.is_not_comedian? && current_user.is_not_producer?)
     the_id = current_user.id
     @the_user = User.where({ :id => the_id }).at(0)
     render({ :template => "users/new_role" })
-    elsif current_user != nil && (current_user.comedian_name.present? || current_user.producer_name.present?)
+    elsif current_user != nil && (current_user.is_comedian? || current_user.is_producer?)
     redirect_to("/", notice: "You already chose roles. You can edit your role and bio in edit profile.")
     else
     redirect_to("/users/sign_in", notice: "You have to sign in to choose role and edit profile.")
@@ -80,11 +80,11 @@ class UsersController < ApplicationController
     the_id = current_user.id
     @the_user = User.where({ :id => the_id }).at(0)
 
-    the_user.comedian_name = params.fetch("query_comedian_name")
-    # the_user.city = params.fetch("query_city")
-    # the_user.state = params.fetch("query_state")
-    the_user.comedian_bio = params.fetch("query_comedian_bio")
-    the_user.short_comedian_bio = params.fetch("query_comedian_short_bio")
+    @the_user.comedian_name = params.fetch("query_comedian_name")
+    @the_user.comedian_bio = params.fetch("query_comedian_bio")
+    @the_user.short_comedian_bio = params.fetch("query_comedian_short_bio")
+    @the_user.comedian_profile_pic = params.fetch("query_comedian_profile_pic")
+    
     selected_styles = params[:query_comedy_style] || []
       selected_styles.each do |style_id|
         the_comic_style = ComicStyle.new
@@ -93,9 +93,9 @@ class UsersController < ApplicationController
         the_comic_style.save
       end
       
-    if the_user.valid?
-      the_user.save
-      redirect_to("/comedians/#{current_user.id}", { :notice => "Comedian bio updated successfully."} )
+    if @the_user.valid?
+      @the_user.save
+      redirect_to("/comedians/#{current_user.name.gsub(' ', '_')}", { :notice => "Comedian bio updated successfully."} )
     else
       redirect_to("/", { :alert => the_show.errors.full_messages.to_sentence })
     end
@@ -105,13 +105,13 @@ class UsersController < ApplicationController
     the_id = current_user.id
     @the_user = User.where({ :id => the_id }).at(0)
 
-    the_user.producer_name = params.fetch("query_producer_name")
-    # the_user.city = params.fetch("query_city")
-    # the_user.state = params.fetch("query_state")
-    the_user.producer_bio = params.fetch("query_producer_bio")
-    if the_user.valid?
-      the_user.save
-      redirect_to("/", { :notice => "Producer bio updated successfully."} )
+    @the_user.producer_name = params.fetch("query_producer_name")
+    @the_user.producer_bio = params.fetch("query_producer_bio")
+    @the_user.producer_profile_pic = params.fetch("query_producer_profile_pic")
+
+    if @the_user.valid?
+      @the_user.save
+      redirect_to("/producers/#{current_user.name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
     else
       redirect_to("/", { :alert => the_show.errors.full_messages.to_sentence })
     end
@@ -121,13 +121,14 @@ class UsersController < ApplicationController
     the_id = current_user.id
     @the_user = User.where({ :id => the_id }).at(0)
 
-    the_user.producer_name = params.fetch("query_producer_name")
-    the_user.comedian_name = params.fetch("query_comedian_name")
-    # the_user.city = params.fetch("query_city")
-    # the_user.state = params.fetch("query_state")
-    the_user.comedian_bio = params.fetch("query_comedian_bio")
-    the_user.short_comedian_bio = params.fetch("query_comedian_short_bio")
-    the_user.producer_bio = params.fetch("query_producer_bio")
+    @the_user.producer_name = params.fetch("query_producer_name")
+    @the_user.comedian_name = params.fetch("query_comedian_name")
+    @the_user.comedian_bio = params.fetch("query_comedian_bio")
+    @the_user.short_comedian_bio = params.fetch("query_comedian_short_bio")
+    @the_user.comedian_profile_pic = params.fetch("query_comedian_profile_pic")
+    @the_user.producer_bio = params.fetch("query_producer_bio")
+    @the_user.producer_profile_pic = params.fetch("query_producer_profile_pic")
+
     selected_styles = params[:query_comedy_style] || []
       selected_styles.each do |style_id|
         the_comic_style = ComicStyle.new
@@ -135,9 +136,9 @@ class UsersController < ApplicationController
         the_comic_style.comedy_style_id = style_id
         the_comic_style.save
       end
-    if the_user.valid?
-      the_user.save
-      redirect_to("/comedians/#{current_user.id}", { :notice => "Producer bio updated successfully."} )
+    if @the_user.valid?
+      @the_user.save
+      redirect_to("/comedians/#{current_user.name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
     else
       redirect_to("/", { :alert => the_show.errors.full_messages.to_sentence })
     end
