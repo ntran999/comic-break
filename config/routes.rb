@@ -118,7 +118,7 @@ Rails.application.routes.draw do
   post("/modify_show_sign_up/:path_id", { :controller => "show_sign_ups", :action => "update" })
   
   # DELETE
-  get("/delete_show_sign_up/:path_id", { :controller => "show_sign_ups", :action => "destroy" })
+  post("/delete_show_sign_up/:path_id", { :controller => "show_sign_ups", :action => "destroy" })
 
   #------------------------------
 

@@ -131,6 +131,22 @@
   </form>
   <% end %>
 
+   <%# if !current_user.has_signed_up_for_show?(@the_show.id) %>
+<!--  <div>
+  <form action="/insert_show_sign_up/<%#= @the_show.id %>" method="post">
+    <input type="hidden" name="_method" value="post">
+    <!-- Add other form fields if needed -->-->
+<!--    <button type="submit">Sign up</button>
+  </form>
+  </div>
+  <%# elsif current_user.has_signed_up_for_show?(@the_show.id) %>-->
+<!--  <form action="/delete_show_sign_up/<%#= @the_show.id %>" method="post">
+    <input type="hidden" name="_method" value="post">
+    <!-- Add other form fields if needed -->-->
+<!--    <button type="submit">Withdraw from Sign up</button>
+  </form>
+  <%# end %>-->
+
   <% else %>
 
   <p> You have to <a href="/users/sign_in">sign in</a> to sign up and bookmark the show! <p>

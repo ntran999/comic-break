@@ -57,4 +57,9 @@ def is_not_producer?
   !is_producer?
 end
 
+def has_signed_up_for_show?(show_id)
+  show_sign_up = ShowSignUp.find_by(user_id: id, show_id: show_id)
+  show_sign_up.present?
+end
+
 end

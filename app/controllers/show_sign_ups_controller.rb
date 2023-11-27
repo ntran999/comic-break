@@ -53,10 +53,10 @@ class ShowSignUpsController < ApplicationController
 
   def destroy
     the_id = params.fetch("path_id")
-    the_show_sign_up = ShowSignUp.where({ :id => the_id }).at(0)
+    the_show_sign_up = ShowSignUp.find_by(user_id: current_user.id, show_id: the_id)
 
     the_show_sign_up.destroy
 
-    redirect_to("/show_sign_ups", { :notice => "Show sign up deleted successfully."} )
+    redirect_to("/shows/#{the_id}", { :notice => "Show sign up deleted successfully."} )
   end
 end
