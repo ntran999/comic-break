@@ -62,4 +62,9 @@ def has_signed_up_for_show?(show_id)
   show_sign_up.present?
 end
 
+def has_favorite_for_show?(show_id)
+  show_favorite = FavoriteShow.find_by(user_id: id, show_id: show_id)
+  show_favorite.present?
+end
+
 end

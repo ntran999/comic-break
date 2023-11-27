@@ -18,39 +18,41 @@ class FavoriteShowsController < ApplicationController
   end
 
   def create
+
     the_favorite_show = FavoriteShow.new
-    the_favorite_show.show_id = params.fetch("query_show_id")
-    the_favorite_show.user_id = params.fetch("query_user_id")
-
+    the_favorite_show.user_id = current_user.id
+    show_id = params.fetch("path_id")
+    the_favorite_show.show_id = show_id
+    
     if the_favorite_show.valid?
       the_favorite_show.save
-      redirect_to("/favorite_shows", { :notice => "Favorite show created successfully." })
+      redirect_to("/shows/#{show_id}", { :notice => "Favorite show created successfully." })
     else
-      redirect_to("/favorite_shows", { :alert => the_favorite_show.errors.full_messages.to_sentence })
+      redirect_to("/shows/#{show_id}", { :alert => the_favorite_show.errors.full_messages.to_sentence })
     end
-  end
-
-  def update
-    the_id = params.fetch("path_id")
-    the_favorite_show = FavoriteShow.where({ :id => the_id }).at(0)
-
-    the_favorite_show.show_id = params.fetch("query_show_id")
-    the_favorite_show.user_id = params.fetch("query_user_id")
-
-    if the_favorite_show.valid?
-      the_favorite_show.save
-      redirect_to("/favorite_shows/#{the_favorite_show.id}", { :notice => "Favorite show updated successfully."} )
-    else
-      redirect_to("/favorite_shows/#{the_favorite_show.id}", { :alert => the_favorite_show.errors.full_messages.to_sentence })
-    end
-  end
+  end  
 
   def destroy
     the_id = params.fetch("path_id")
-    the_favorite_show = FavoriteShow.where({ :id => the_id }).at(0)
+    the_favorite_show = FavoriteShow.find_by(user_id: current_user.id, show_id: the_id)
 
     the_favorite_show.destroy
 
-    redirect_to("/favorite_shows", { :notice => "Favorite show deleted successfully."} )
+    redirect_to("/shows/#{the_id}", { :notice => "Favorite show deleted successfully."} )
   end
+
+  # def update
+  #   the_id = params.fetch("path_id")
+  #   the_favorite_show = FavoriteShow.where({ :id => the_id }).at(0)
+
+  #   the_favorite_show.show_id = params.fetch("query_show_id")
+  #   the_favorite_show.user_id = params.fetch("query_user_id")
+
+  #   if the_favorite_show.valid?
+  #     the_favorite_show.save
+  #     redirect_to("/favorite_shows/#{the_favorite_show.id}", { :notice => "Favorite show updated successfully."} )
+  #   else
+  #     redirect_to("/favorite_shows/#{the_favorite_show.id}", { :alert => the_favorite_show.errors.full_messages.to_sentence })
+  #   end
+  # end
 end

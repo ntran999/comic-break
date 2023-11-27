@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   # Routes for the Favorite show resource:
 
   # CREATE
-  post("/insert_favorite_show", { :controller => "favorite_shows", :action => "create" })
+  post("/insert_favorite_show/:path_id", { :controller => "favorite_shows", :action => "create" })
           
   # READ
   get("/favorite_shows", { :controller => "favorite_shows", :action => "index" })
@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   post("/modify_favorite_show/:path_id", { :controller => "favorite_shows", :action => "update" })
   
   # DELETE
-  get("/delete_favorite_show/:path_id", { :controller => "favorite_shows", :action => "destroy" })
+  post("/delete_favorite_show/:path_id", { :controller => "favorite_shows", :action => "destroy" })
 
   #------------------------------
 
@@ -115,7 +115,7 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_show_sign_up/:path_id", { :controller => "show_sign_ups", :action => "update" })
+  # post("/modify_show_sign_up/:path_id", { :controller => "show_sign_ups", :action => "update" })
   
   # DELETE
   post("/delete_show_sign_up/:path_id", { :controller => "show_sign_ups", :action => "destroy" })

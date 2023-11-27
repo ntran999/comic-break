@@ -32,22 +32,7 @@ class ShowSignUpsController < ApplicationController
       end
     else 
       show_id = params.fetch("path_id")
-      redirect_to("/shows/#{show_id}")
-    end
-  end
-
-  def update
-    the_id = params.fetch("path_id")
-    the_show_sign_up = ShowSignUp.where({ :id => the_id }).at(0)
-
-    the_show_sign_up.user_id = params.fetch("query_user_id")
-    the_show_sign_up.show_id = params.fetch("query_show_id")
-
-    if the_show_sign_up.valid?
-      the_show_sign_up.save
-      redirect_to("/show_sign_ups/#{the_show_sign_up.id}", { :notice => "Show sign up updated successfully."} )
-    else
-      redirect_to("/show_sign_ups/#{the_show_sign_up.id}", { :alert => the_show_sign_up.errors.full_messages.to_sentence })
+      redirect_to("/shows/#{show_id}", { :notice => "You have to create a comedian bio to sign up for shows." })
     end
   end
 
@@ -59,4 +44,19 @@ class ShowSignUpsController < ApplicationController
 
     redirect_to("/shows/#{the_id}", { :notice => "Show sign up deleted successfully."} )
   end
+
+  # def update
+  #   the_id = params.fetch("path_id")
+  #   the_show_sign_up = ShowSignUp.where({ :id => the_id }).at(0)
+
+  #   the_show_sign_up.user_id = params.fetch("query_user_id")
+  #   the_show_sign_up.show_id = params.fetch("query_show_id")
+
+  #   if the_show_sign_up.valid?
+  #     the_show_sign_up.save
+  #     redirect_to("/show_sign_ups/#{the_show_sign_up.id}", { :notice => "Show sign up updated successfully."} )
+  #   else
+  #     redirect_to("/show_sign_ups/#{the_show_sign_up.id}", { :alert => the_show_sign_up.errors.full_messages.to_sentence })
+  #   end
+  # end
 end
