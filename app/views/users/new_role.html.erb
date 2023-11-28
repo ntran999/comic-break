@@ -4,6 +4,8 @@
 }
 </style>
 
+<% if current_user != nil && (current_user.is_not_comedian? && current_user.is_not_producer?) %>
+
 <div>
   <div>
     <fieldset>
@@ -215,3 +217,95 @@
     });
   });
 </script>
+
+<% elsif current_user != nil && (current_user.is_comedian? && current_user.is_not_producer?) %>
+<div>
+<fieldset>
+      <legend><h3>Create Your Producer Profile</h3></legend>
+      <form action="/users/producer_profile" method="post">
+      <div>
+        <label for="producer_name_box">
+          Producer Name
+        </label>
+        <input type="text" id="producer_name_box" name="query_producer_name" value="<%= @the_user.name%>">
+      </div>
+
+      <div>
+        <label for="producer_bio_box">
+          Producer Bio
+        </label>
+        <textarea id="producer_bio_box" name="query_producer_bio"></textarea>
+      </div>
+
+      <div>
+        <label for="producer_profile_pic_box">
+          Comedian Profile Photo
+        </label>
+        <textarea id="producer_profile_pic_box" name="query_producer_profile_pic"></textarea>
+      </div>
+
+      <button>
+        Create producer bio
+      </button>
+    </form>
+  </fieldset>
+  </div>
+
+  <%# elsif current_user != nil && (current_user.is_not_comedian? && current_user.is_producer?) %>
+<!----> 
+  <% else %>
+  <div>
+  <fieldset>
+      <legend><h3>Create Your Producer Profile</h3></legend>
+      <form action="/users/comedian_profile" method="post">
+      <div>
+        <label for="comedian_name_box">
+          Comedian Name
+        </label>
+        <input type="text" id="comedian_name_box" name="query_comedian_name" value="<%= @the_user.name%>">
+      </div>
+
+      <div>
+        <label for="comedian_bio_box">
+          Comedian Bio
+        </label>
+        <textarea id="comedian_bio_box" name="query_comedian_bio"></textarea>
+      </div>
+
+      <div>
+        <label for="comedian_short_bio_box">
+          Comedian Short Bio (150 characters)
+        </label>
+        <textarea id="comedian_short_bio_box" name="query_comedian_short_bio" maxlength="150"></textarea>
+      </div>
+
+      <div>
+        <label for="comedian_profile_pic_box">
+          Comedian Profile Photo
+        </label>
+        <textarea id="comedian_profile_pic_box" name="query_comedian_profile_pic"></textarea>
+      </div>
+
+      <div>
+        <label for="comedian_style">
+          Comedian Style (choose all that applied)
+        </label>
+        <div id="comedy_style_checkboxes">
+          <% ComedyStyle.all.each do |comedy_style| %>
+            <label>
+              <%= check_box_tag "query_comedy_style[]", comedy_style.id %>
+              <%= comedy_style.name %>
+            </label><br>
+          <% end %>
+        </div>
+      </div>
+
+      <button>
+        Create comedian bio
+      </button>
+    </form>
+    </form>
+    </fieldset>
+    </div>
+
+  <% end %>

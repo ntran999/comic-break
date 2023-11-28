@@ -65,11 +65,11 @@ class UsersController < ApplicationController
 
 
   def new_role
-    if current_user != nil && (current_user.is_not_comedian? && current_user.is_not_producer?)
+    if current_user != nil && (current_user.is_not_comedian? || current_user.is_not_producer?)
     the_id = current_user.id
     @the_user = User.where({ :id => the_id }).at(0)
     render({ :template => "users/new_role" })
-    elsif current_user != nil && (current_user.is_comedian? || current_user.is_producer?)
+    elsif current_user != nil && (current_user.is_comedian? && current_user.is_producer?)
     redirect_to("/", notice: "You already chose roles. You can edit your role and bio in edit profile.")
     else
     redirect_to("/users/sign_in", notice: "You have to sign in to choose role and edit profile.")
