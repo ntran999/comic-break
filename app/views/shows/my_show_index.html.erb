@@ -13,8 +13,163 @@
       </div>
 
       <div>
+            <table border="1">
+              <tr>
+                <th>
+                  Image
+                </th>
+
+                <th>
+                  Name
+                </th>
+
+                <th>
+                  Date
+                </th>
+
+                <th>
+                  Time
+                </th>
+
+                <th>
+                  Venue 
+                </th>
+
+                <th>
+                  Address 
+                </th>
+
+                <th>
+                  Show type
+                </th>
+
+                <th>
+                </th>
+              </tr>
+
+              <% @list_of_current_shows.each do |a_show| %>
+              <tr>
+                <td>
+                  <img src="<%= a_show.image%>" style = "width:250px;">
+                </td>
+
+                <td>
+                  <%= a_show.name %>
+                </td>
+
+                <td>
+                  <%= a_show.date.strftime('%a, %b %d') %>
+                </td>
+
+                <td>
+                  <%= a_show.date.strftime('%I:%M %p') %>
+                </td>
+
+                <td>
+                  <%= a_show.venue_name %>
+                </td>
+
+                <td>
+                  <%= a_show.address %>
+                  <div>
+                  <%= a_show.city %>, <%= a_show.state %>
+                </td>
+
+                <td>
+                  <%= a_show.show_type.name %>
+                </td>
+
+                <td>
+                  <a href="/shows/<%= a_show.id %>">
+                    Show details
+                  </a>
+                </td>
+              </tr>
+              <% end %>
+            </table>
+      </div>
+
+      <div>
       <h4> Archived shows (<%= @list_of_archived_shows.count %>)</h4>
       </div>
+
+      <div>
+            <table border="1">
+              <tr>
+                <th>
+                  Image
+                </th>
+
+                <th>
+                  Name
+                </th>
+
+                <th>
+                  Date
+                </th>
+
+                <th>
+                  Time
+                </th>
+
+                <th>
+                  Venue 
+                </th>
+
+                <th>
+                  Address 
+                </th>
+
+                <th>
+                  Show type
+                </th>
+
+                <th>
+                </th>
+              </tr>
+
+              <% @list_of_archived_shows.each do |a_show| %>
+              <tr>
+                <td>
+                  <img src="<%= a_show.image%>" style = "width:250px;">
+                </td>
+
+                <td>
+                  <%= a_show.name %>
+                </td>
+
+                <td>
+                  <%= a_show.date.strftime('%a, %b %d') %>
+                </td>
+
+                <td>
+                  <%= a_show.date.strftime('%I:%M %p') %>
+                </td>
+
+                <td>
+                  <%= a_show.venue_name %>
+                </td>
+
+                <td>
+                  <%= a_show.address %>
+                  <div>
+                  <%= a_show.city %>, <%= a_show.state %>
+                </td>
+
+                <td>
+                  <%= a_show.show_type.name %>
+                </td>
+
+                <td>
+                  <a href="/shows/<%= a_show.id %>">
+                    Show details
+                  </a>
+                </td>
+              </tr>
+              <% end %>
+            </table>
+      </div>
+
       <hr>
     <h1>
       Gigs

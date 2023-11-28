@@ -1,8 +1,10 @@
 class ShowsController < ApplicationController
   def index
     matching_shows = Show.all
+    
+    ##where('date >= ?', Time.now)
 
-    @list_of_shows = matching_shows.order({ :created_at => :desc })
+    @list_of_shows = matching_shows.order({ :date => :asc })
 
     render({ :template => "shows/index" })
   end

@@ -1,8 +1,11 @@
 <div>
   <div>
     <h1>
-      Show #<%= @the_show.id %> details
+     <%= @the_show.name %>
     </h1>
+    <h5>
+    By <a href="/producers/<%= @the_show.user.producer_name.gsub(" ","_")%>"><%= @the_show.user.producer_name%></a>
+    </h5>
 
     <div>
       <div>
@@ -19,39 +22,16 @@
     </div>
 
     <dl>
-      <!--<dt>
-        User
-      </dt>
-      <dd>
-        <%#= @the_show.user_id %>-->
-<!--      </dd>-->
+      
+      
       <dt>
-        
-      </dt>
-      <dd>
         <img src="<%= @the_show.image%>" style = "width:250px;">
-      </dd>
-
-      <dt>
-        Name
       </dt>
-      <dd>
-        <%= @the_show.name %>
-      </dd>
 
+      
       <dt>
-        Date
+        <%= @the_show.date.strftime('%a, %b %d') %> <%= @the_show.date.strftime('%I:%M %p') %>
       </dt>
-      <dd>
-        <%= @the_show.date.strftime('%b %d, %Y') %>
-      </dd>
-
-      <dt>
-        Time
-      </dt>
-      <dd>
-        <%= @the_show.date.strftime('%I:%M %p') %>
-      </dd>
 
       <dt>
         About The Show
@@ -67,19 +47,16 @@
         <%= @the_show.venue_name %>
       </dd>
 
-      <dt>
-        Address
-      </dt>
+      <div>
       <dd>
-        <%= @the_show.address %>, <%= @the_show.city %>, <%= @the_show.state %>, <%= @the_show.zip %>
+        <%= @the_show.address %>
+        <div>
+        <%= @the_show.city %>, <%= @the_show.state %>
+        </div>
       </dd>
+      </div>
 
-      <!--<dt>
-        Google api address
-      </dt>
-      <dd>
-        <%#= @the_show.google_api_address %>-->
-<!--      </dd>-->
+      
 
       <dt>
         Show type
@@ -88,26 +65,7 @@
         <%= @the_show.show_type.name %>
       </dd>
 
-     <!-- <dt>
-        Show sign ups count
-      </dt>
-      <dd>
-        <%#= @the_show.show_sign_ups_count %>-->
-<!--      </dd>-->
-
-      <!--<dt>
-        Created at
-      </dt>
-      <dd>
-        <%#= time_ago_in_words(@the_show.created_at) %> ago-->
-<!--      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%#= time_ago_in_words(@the_show.updated_at) %> ago-->
-<!--      </dd>-->
+     
     </dl>
   </div>
 </div>

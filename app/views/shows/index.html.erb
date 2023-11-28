@@ -103,14 +103,6 @@
   <div>
     <table border="1">
       <tr>
-        <!--<th>
-          ID
-        </th>
-
-        <th>
-          User
-        </th>-->
-
         <th>
           Image
         </th>
@@ -118,10 +110,6 @@
         <th>
           Name
         </th>
-
-        <!--<th>
-          Time
-        </th>-->
 
         <th>
           Date
@@ -135,45 +123,13 @@
           Venue 
         </th>
 
-       <!-- <th>
-          About The Show
-        </th>    -->  
-
-        <!--<th>
-          Address
-        </th>
-
         <th>
-          City
+          Address 
         </th>
-
-        <th>
-          State
-        </th>
-
-        <th>
-          Zip
-        </th>-->
-
-        <!--<th>
-          Google api address
-        </th>-->
 
         <th>
           Show type
         </th>
-
-        <!--<th>
-          Show sign ups count
-        </th>-->
-
-       <!-- <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>-->
 
         <th>
         </th>
@@ -190,7 +146,7 @@
         </td>
 
         <td>
-          <%= a_show.date.strftime('%b %d, %Y') %>
+          <%= a_show.date.strftime('%a, %b %d') %>
         </td>
 
         <td>
@@ -201,26 +157,12 @@
           <%= a_show.venue_name %>
         </td>
 
-        <!--<td>-->
-          <%#= a_show.description %>
-<!--        </td>-->
-
-        <!--<td>-->
-          <%#= a_show.address %>
-<!--        </td>
-
         <td>
-          <%#= a_show.city %>-->
-<!--        </td>
+          <%= a_show.address %>
+          <div>
+          <%= a_show.city %>, <%= a_show.state %>
+        </td>
 
-        <td>
-          <%#= a_show.state %>-->
-<!--        </td>
-
-        <td>
-          <%#= a_show.zip %>-->
-<!--        </td>
--->
         <td>
           <%= a_show.show_type.name %>
         </td>
