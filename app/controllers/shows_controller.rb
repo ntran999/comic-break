@@ -37,6 +37,7 @@ class ShowsController < ApplicationController
     the_show.date = params.fetch("query_date")
     the_show.description = params.fetch("query_description")
     the_show.image = params.fetch("query_image")
+    the_show.venue = params.fetch("query_venue")
     the_show.address = params.fetch("query_address")
     the_show.city = params.fetch("query_city")
     the_show.state = params.fetch("query_state")
