@@ -52,7 +52,7 @@
         </td>
 
         <td>
-          <a href="/producers/<%= a_user.name %>">
+          <a href="/producers/<%= a_user.producer_name.gsub(' ', '_') %>">
             Show details
           </a>
         </td>
@@ -63,5 +63,3 @@
 </div>
 
 <hr>
-
-

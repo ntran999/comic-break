@@ -49,6 +49,11 @@ def is_producer?
   producer_name.present?
 end
 
+def is_producer_and_comedian?
+  producer_name.present?
+  comedian_name.present?
+end
+
 def is_not_comedian?
   !is_comedian?
 end

@@ -15,9 +15,11 @@ Rails.application.routes.draw do
 
   get("/users/new_profile", { :controller => "users", :action => "new_profile" })
 
-  post("/users/save_new_profile", { :controller => "users", :action => "save_new_profile" })
-
   get("/users/new_role", { :controller => "users", :action => "new_role" })
+
+  ## UPDATE
+
+  post("/users/save_new_profile", { :controller => "users", :action => "save_new_profile" })
 
   post("/users/comedian_profile", { :controller => "users", :action => "update_comedian" })
 
@@ -131,6 +133,8 @@ Rails.application.routes.draw do
   get("/shows", { :controller => "shows", :action => "index" })
   
   get("/shows/:path_id", { :controller => "shows", :action => "show" })
+
+  get("/users/my_show", {:controller => "shows", :action => "my_show_index"})
   
   # UPDATE
   

@@ -17,6 +17,17 @@ class ShowsController < ApplicationController
     render({ :template => "shows/show" })
   end
 
+  def my_show_index
+    @list_of_current_shows = current_user.shows.where('date >= ?', Time.now).order(date: :asc)
+    @list_of_archived_shows = current_user.shows.where('date <= ?', Time.now).order(date: :asc)
+
+    @list_of_current_sign_up = current_user.show_sign_ups.includes(:show).where('shows.date >= ?', Time.now).order('shows.date ASC')
+    @list_of_archived_sign_up = current_user.show_sign_ups.includes(:show).where('shows.date < ?', Time.now).order('shows.date ASC')
+    
+    render({ :template => "shows/my_show_index" })
+
+  end
+
   def create
     the_show = Show.new
     the_show.user_id = current_user.id

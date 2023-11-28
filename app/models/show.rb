@@ -27,5 +27,13 @@ belongs_to :user, required: true, class_name: "User", foreign_key: "user_id", co
 has_many  :show_sign_ups, class_name: "ShowSignUp", foreign_key: "show_id", dependent: :destroy
 has_many  :favorite_shows, class_name: "FavoriteShow", foreign_key: "show_id", dependent: :destroy
 belongs_to :show_type, required: true, class_name: "ShowType", foreign_key: "show_type_id", counter_cache: true
+
+def is_current?
+  time >= Time.now
+end
+
+def is_archived?
+  time < Time.now
+end
   
 end

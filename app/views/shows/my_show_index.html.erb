@@ -1,0 +1,72 @@
+<div>
+  <% if current_user.is_producer_and_comedian? %>
+    <h1>
+      Productions 
+    </h1>
+    <div>
+    <h5>
+      Producer: <a href="/producers/<%= current_user.producer_name.gsub(" ","_")%>"><%= current_user.producer_name%></a>
+    </h5>
+    </div>
+      <div>
+      <h4> Upcoming shows (<%= @list_of_current_shows.count %>)</h4>
+      </div>
+
+      <div>
+      <h4> Archived shows (<%= @list_of_archived_shows.count %>)</h4>
+      </div>
+      <hr>
+    <h1>
+      Gigs
+    </h1>
+    <div>
+    <h5>
+      Comedian: <a href="/comedians/<%= current_user.comedian_name.gsub(" ","_")%>"><%= current_user.comedian_name%></a>
+    <h5>
+    </div>
+      <div>
+      <h4> Upcoming shows (<%= @list_of_current_sign_up.count %>)</h4>
+      </div>
+
+      <div>
+      <h4> Archived shows (<%= @list_of_archived_sign_up.count %>)</h4>
+      </div>
+      <hr>
+
+  <% elsif current_user.is_producer? %>
+    <h1>
+      Productions 
+    </h1>
+    <div>
+    <h5>
+      Producer: <a href="/producers/<%= current_user.producer_name.gsub(" ","_")%>"><%= current_user.producer_name%></a>
+    </h5>
+    </div>
+      <div>
+      <h4> Upcoming shows (<%= @list_of_current_shows.count %>)</h4>
+      </div>
+
+      <div>
+      <h4> Archived shows (<%= @list_of_archived_shows.count %>)</h4>
+      </div>
+      <hr>
+
+  <% elsif current_user.is_comedian? %>
+    <h1>
+      Gigs
+    </h1>
+    <div>
+    <h3>
+      Comedian: <a href="/comedians/<%= current_user.comedian_name.gsub(" ","_")%>"><%= current_user.comedian_name%></a>
+    <h3>
+    </div>
+      <div>
+      <h4> Upcoming shows (<%= @list_of_current_sign_up.count %>)</h4>
+      </div>
+
+      <div>
+      <h4> Archived shows (<%= @list_of_archived_sign_up.count %>)</h4>
+      </div>
+      <hr>
+
+<% end %>

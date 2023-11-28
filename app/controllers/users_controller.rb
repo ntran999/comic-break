@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def show_comedian
     the_name = params.fetch("path_id").gsub('_', ' ')
 
-    matching_users = User.where({ :name => the_name })
+    matching_users = User.where({ :comedian_name => the_name })
 
     @the_user = matching_users.at(0)
 
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   def show_producer
     the_name = params.fetch("path_id").gsub('_', ' ')
 
-    matching_users = User.where({ :name => the_name })
+    matching_users = User.where({ :producer_name => the_name })
 
     @the_user = matching_users.at(0)
 
@@ -95,7 +95,7 @@ class UsersController < ApplicationController
       
     if @the_user.valid?
       @the_user.save
-      redirect_to("/comedians/#{current_user.name.gsub(' ', '_')}", { :notice => "Comedian bio updated successfully."} )
+      redirect_to("/comedians/#{current_user.comedian_name.gsub(' ', '_')}", { :notice => "Comedian bio updated successfully."} )
     else
       redirect_to("/", { :alert => the_show.errors.full_messages.to_sentence })
     end
@@ -111,7 +111,7 @@ class UsersController < ApplicationController
 
     if @the_user.valid?
       @the_user.save
-      redirect_to("/producers/#{current_user.name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
+      redirect_to("/producers/#{current_user.producer_name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
     else
       redirect_to("/", { :alert => the_show.errors.full_messages.to_sentence })
     end
@@ -138,7 +138,7 @@ class UsersController < ApplicationController
       end
     if @the_user.valid?
       @the_user.save
-      redirect_to("/comedians/#{current_user.name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
+      redirect_to("/comedians/#{current_user.comedian_name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
     else
       redirect_to("/", { :alert => the_show.errors.full_messages.to_sentence })
     end
