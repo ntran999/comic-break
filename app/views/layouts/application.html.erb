@@ -41,21 +41,52 @@
   <div <!--class="custom-dropdown"-->>
   <button class="dropdown-button">My Account</button>
   <div class="dropdown-content">
-    <% if current_user.is_not_producer?%>
+
+    <% if current_user.is_producer_and_comedian?%>
+    <div>
+    <a href="/producers/<%= current_user.producer_name.gsub(' ', '_')%>"> Producer Profile </a>
+    </div>
+    <div>
+    <a href="/comedians/<%= current_user.comedian_name.gsub(' ', '_')%>"> Comedian Profile </a>
+    </div>
+
+    <% elsif current_user.is_producer?%>
+    <div>
+    <a href="/producers/<%= current_user.producer_name.gsub(' ', '_')%>"> Producer Profile </a>
+    </div>
+    <% elsif current_user.is_comedian?%>
+    <div>
+    <a href="/comedians/<%= current_user.comedian_name.gsub(' ', '_')%>"> Comedian Profile </a>
+    </div>
+    <% end %>
+
+    <% if current_user.is_not_comedian? && current_user.is_not_producer? %>    
+    <div>
+    <a href="/users/new_role"> Become a Comedian/Producer </a>
+    </div>
+
+    <% elsif current_user.is_not_producer?%>    
     <div>
     <a href="/users/new_role"> Become a Producer </a>
-    <% elsif current_user.is_not_comedian?%>
+    </div>
+    <% elsif current_user.is_not_comedian?%>    
     <div>
     <a href="/users/new_role"> Become a Comedian </a>
+    </div>    
     <% end %>
+    
     <div>
-    <a href="/users/my_show"> My Shows </a>   
+    <a href="/users/my_shows"> My Shows </a>   
+    </div>
     <div>
-    <a href=""> My Bookmarks </a>    
+    <a href="/users/my_bookmarks"> My Bookmarks </a>    
+    </div>
     <div>
     <a href="/users/edit"> Account Setting</a>
+    </div>
     <div>
     <a href="/users/sign_out"> Sign-out </a>
+    </div>
   </div>
   
   <% else %>

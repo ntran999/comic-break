@@ -30,6 +30,11 @@ class ShowsController < ApplicationController
 
   end
 
+  def my_bookmark
+    @list_of_current_bookmarks = current_user.favorite_shows.includes(:show).where('shows.date >= ?', Time.now).order('shows.date ASC')
+    @list_of_archived_bookmarks = current_user.favorite_shows.includes(:show).where('shows.date < ?', Time.now).order('shows.date ASC')
+  end
+
   def create
     the_show = Show.new
     the_show.user_id = current_user.id
@@ -37,7 +42,7 @@ class ShowsController < ApplicationController
     the_show.date = params.fetch("query_date")
     the_show.description = params.fetch("query_description")
     the_show.image = params.fetch("query_image")
-    the_show.venue = params.fetch("query_venue")
+    the_show.venue_name = params.fetch("query_venue")
     the_show.address = params.fetch("query_address")
     the_show.city = params.fetch("query_city")
     the_show.state = params.fetch("query_state")
@@ -66,6 +71,7 @@ class ShowsController < ApplicationController
     the_show.image = params.fetch("query_image")
     the_show.date = params.fetch("query_date")
     the_show.description = params.fetch("query_description")
+    the_show.venue_name = params.fetch("query_venue")
     the_show.address = params.fetch("query_address")
     the_show.city = params.fetch("query_city")
     the_show.state = params.fetch("query_state")

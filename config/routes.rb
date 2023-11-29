@@ -134,7 +134,9 @@ Rails.application.routes.draw do
   
   get("/shows/:path_id", { :controller => "shows", :action => "show" })
 
-  get("/users/my_show", {:controller => "shows", :action => "my_show_index"})
+  get("/users/my_shows", {:controller => "shows", :action => "my_show_index"})
+
+  get("/users/my_bookmarks", {:controller => "shows", :action => "my_bookmark"})
   
   # UPDATE
   

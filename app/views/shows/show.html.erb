@@ -14,11 +14,6 @@
         </a>
       </div>
 
-      <div>
-        <a href="/delete_show/<%= @the_show.id %>">
-          Delete show
-        </a>
-      </div>
     </div>
 
     <dl>
@@ -46,6 +41,7 @@
       <dd>
         <%= @the_show.venue_name %>
       </dd>
+      
 
       <div>
       <dd>
@@ -72,14 +68,15 @@
 
 <hr>
 
+<div>
 <% if current_user != nil && current_user.comedian_name.present?%>
   <% if !current_user.has_signed_up_for_show?(@the_show.id) %>
-  <div>
+  
   <form action="/insert_show_sign_up/<%= @the_show.id %>" method="post">
     <input type="hidden" name="_method" value="post">
     <button type="submit">Sign up</button>
   </form>
-  </div>
+  
   <% elsif current_user.has_signed_up_for_show?(@the_show.id) %>
   <form action="/delete_show_sign_up/<%= @the_show.id %>" method="post">
     <input type="hidden" name="_method" value="post">
@@ -88,12 +85,12 @@
   <% end %>
 
    <% if !current_user.has_favorite_for_show?(@the_show.id) %>
-  <div>
+  
   <form action="/insert_favorite_show/<%= @the_show.id %>" method="post">
     <input type="hidden" name="_method" value="post">
     <button type="submit">Bookmark</button>
   </form>
-  </div>
+  
   <% elsif current_user.has_favorite_for_show?(@the_show.id) %>
   <form action="/delete_favorite_show/<%= @the_show.id %>" method="post">
     <input type="hidden" name="_method" value="post">
@@ -106,9 +103,11 @@
   <p> You have to <a href="/users/sign_in">sign in</a> to sign up and bookmark the show! <p>
 
   <% end %>
-
+  </div>
 <hr>
 
+<!--Edit Show - Only for Show Producer - Maybe Making This A Pop Up-->
+<% if current_user.id == @the_show.user.id %>
 <div>
   <div>
     <h2>
@@ -134,14 +133,6 @@
         <input type="text" id="name_box" name="query_name" value="<%= @the_show.name %>">
       </div>
 
-      <!--<div>
-        <label for="time_box">
-          Time
-        </label>
-
-        <input type="time" id="time_box" name="query_time" value="<%#= @the_show.date.strftime('%H:%M') %>">
-      </div>-->
-
       <div>
         <label for="date_box">
           Date
@@ -158,6 +149,15 @@
 
         <textarea id="description_box" name="query_description"><%= @the_show.description %></textarea>
       </div>
+
+      <div>
+        <label for="venue_box">
+          Venue
+        </label>
+
+        <input type="text" id="venue_box" name="query_venue" value="<%= @the_show.venue_name %>">
+      </div>
+
 
       <div>
         <label for="address_box">
@@ -191,14 +191,6 @@
         <input type="text" id="zip_box" name="query_zip" value="<%= @the_show.zip %>">
       </div>
 
-      <!--<div>
-        <label for="google_api_address_box">
-          Google api address
-        </label>
-
-        <input type="text" id="google_api_address_box" name="query_google_api_address" value="<%#= @the_show.google_api_address %>">
-      </div>-->
-
       <div>
         <label for="show_type_id_box">
           Show type
@@ -210,22 +202,21 @@
         <% end %>
       </select>  
 
-        <!--<input type="text" id="show_type_id_box" name="query_show_type_id" value="<%#= @the_show.show_type_id %>">-->
-      </div>
-
-      <!--<div>
-        <label for="show_sign_ups_count_box">
-          Show sign ups count
-        </label>
-
-        <input type="text" id="show_sign_ups_count_box" name="query_show_sign_ups_count" value="<%#= @the_show.show_sign_ups_count %>">
-      </div>-->
-
+      <div>
       <button>
         Update show
       </button>
+      
+
+      
+        <button href="/delete_show/<%= @the_show.id %>">
+          Delete show
+        </button>
+      </div>
     </form>
   </div>
 </div>
+<% else %>
+<% end %>
 
 <hr>

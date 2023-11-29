@@ -50,8 +50,7 @@ def is_producer?
 end
 
 def is_producer_and_comedian?
-  producer_name.present?
-  comedian_name.present?
+  producer_name.present? && comedian_name.present?
 end
 
 def is_not_comedian?

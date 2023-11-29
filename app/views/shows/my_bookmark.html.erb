@@ -1,0 +1,171 @@
+<h2> Bookmarked Shows </h2>
+<h3> Upcoming shows (<%= @list_of_current_bookmarks.count %>)</h3>
+
+<% if @list_of_current_bookmarks.count == 0 %>
+      <p> You haven't bookmarked any current show at the moment. </p>
+      <% else %>
+      <div>
+            <table border="1">
+              <tr>
+                <th>
+                  Image
+                </th>
+
+                <th>
+                  Name
+                </th>
+
+                <th>
+                  Date
+                </th>
+
+                <th>
+                  Time
+                </th>
+
+                <th>
+                  Venue 
+                </th>
+
+                <th>
+                  Address 
+                </th>
+
+                <th>
+                  Show type
+                </th>
+
+                <th>
+                </th>
+              </tr>
+
+              <% @list_of_current_bookmarks.each do |a_favorite| %>
+              <% a_show = a_favorite.show %>
+              <tr>
+                <td>
+                  <img src="<%= a_show.image%>" style = "width:250px;">
+                </td>
+
+                <td>
+                  <%= a_show.name %>
+                </td>
+
+                <td>
+                  <%= a_show.date.strftime('%a, %b %d') %>
+                </td>
+
+                <td>
+                  <%= a_show.date.strftime('%I:%M %p') %>
+                </td>
+
+                <td>
+                  <%= a_show.venue_name %>
+                </td>
+
+                <td>
+                  <%= a_show.address %>
+                  <div>
+                  <%= a_show.city %>, <%= a_show.state %>
+                </td>
+
+                <td>
+                  <%= a_show.show_type.name %>
+                </td>
+
+                <td>
+                  <a href="/shows/<%= a_show.id %>">
+                    Show details
+                  </a>
+                </td>
+              </tr>
+              <% end %>
+            </table>
+      </div>
+      <% end %>
+
+      <div>
+      <h3> Archived shows (<%= @list_of_archived_bookmarks.count %>)</h3>
+      </div>
+
+      <% if @list_of_archived_bookmarks.count  == 0 %>
+      <p> You do not have any archived show at the moment. </p>
+      <% else %>
+      <div>
+            <table border="1">
+              <tr>
+                <th>
+                  Image
+                </th>
+
+                <th>
+                  Name
+                </th>
+
+                <th>
+                  Date
+                </th>
+
+                <th>
+                  Time
+                </th>
+
+                <th>
+                  Venue 
+                </th>
+
+                <th>
+                  Address 
+                </th>
+
+                <th>
+                  Show type
+                </th>
+
+                <th>
+                </th>
+              </tr>
+
+              <% @list_of_archived_bookmarks.each do |a_favorite| %>
+              <% a_show = a_favorite.show %>
+
+              <tr>
+                <td>
+                  <img src="<%= a_show.image%>" style = "width:250px;">
+                </td>
+
+                <td>
+                  <%= a_show.name %>
+                </td>
+
+                <td>
+                  <%= a_show.date.strftime('%a, %b %d') %>
+                </td>
+
+                <td>
+                  <%= a_show.date.strftime('%I:%M %p') %>
+                </td>
+
+                <td>
+                  <%= a_show.venue_name %>
+                </td>
+
+                <td>
+                  <%= a_show.address %>
+                  <div>
+                  <%= a_show.city %>, <%= a_show.state %>
+                </td>
+
+                <td>
+                  <%= a_show.show_type.name %>
+                </td>
+
+                <td>
+                  <a href="/shows/<%= a_show.id %>">
+                    Show details
+                  </a>
+                </td>
+              </tr>
+              <% end %>
+            </table>
+      </div>
+      <% end %>
