@@ -1,4 +1,9 @@
 class ShowsController < ApplicationController
+  def home
+  render({ :template => "shows/home" })
+  end
+
+
   def index
     matching_shows = Show.all
     

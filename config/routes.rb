@@ -4,8 +4,11 @@ Rails.application.routes.draw do
 }
   # Routes for the User resource:
 
+  ## SEARCH
+  # post("/comedians", { :controller => "users", :action => "post_index_comedian" })
+
   # # READ
-  get("/comedians", { :controller => "users", :action => "index_comedian" })
+  get("/comedians", { :controller => "users", :action => "get_index_comedian" })
   
   get("/comedians/:path_id", { :controller => "users", :action => "show_comedian" })
 
@@ -16,6 +19,9 @@ Rails.application.routes.draw do
   get("/users/new_profile", { :controller => "users", :action => "new_profile" })
 
   get("/users/new_role", { :controller => "users", :action => "new_role" })
+
+  
+
 
   ## UPDATE
 
@@ -29,7 +35,7 @@ Rails.application.routes.draw do
 
   # Routes for the Show type resource:
 
-  root "shows#index"
+  root "shows#home"
 
   # # CREATE
   # post("/insert_show_type", { :controller => "show_types", :action => "create" })
@@ -130,6 +136,8 @@ Rails.application.routes.draw do
   post("/insert_show", { :controller => "shows", :action => "create" })
           
   # READ
+  get("/", { :controller => "shows", :action => "home" })
+
   get("/shows", { :controller => "shows", :action => "index" })
   
   get("/shows/:path_id", { :controller => "shows", :action => "show" })

@@ -1,11 +1,39 @@
 class UsersController < ApplicationController
-  def index_comedian
-    matching_users = User.all.where.not(comedian_name: nil)
+  def get_index_comedian
 
-    @list_of_users = matching_users.order({ :name => :asc })
+    comedian_name = params.fetch("query_name","")
+    comedian_name = comedian_name.strip
 
+    location = params.fetch("query_location","")
+    location = location.strip
+
+      if comedian_name.empty? && location.empty?
+      matching_users = User.where.not(comedian_name: nil)
+      @list_of_users = matching_users.order({ :name => :asc })
+
+      elsif comedian_name.present? && location.empty?
+        matching_users = User.where.not(comedian_name: nil).where("comedian_name LIKE ?", "%#{comedian_name}%")
+        @list_of_users = matching_users.order(name: :asc)
+
+      elsif comedian_name.empty? && location.present?
+        matching_users = User.where.not(comedian_name: nil).where("city LIKE ? OR state LIKE ?", "%#{location}%", "%#{location}%")
+        @list_of_users = matching_users.order(name: :asc)
+
+      else
+        matching_users = User.where.not(comedian_name: nil).where("comedian_name LIKE ? AND (city LIKE ? OR state LIKE ?)", "%#{search_input}%", "%#{location}%", "%#{location}%")
+        @list_of_users = matching_users.order(name: :asc)
+      end
+    
+    
     render({ :template => "users/index_comedian" })
+    
   end
+
+  # def get_index_comedian
+  #   matching_users = User.where.not(comedian_name: nil)
+  #   @list_of_users = matching_users.order({ :name => :asc })
+  #   render({ :template => "users/index_comedian" })
+  # end
 
   def show_comedian
     the_name = params.fetch("path_id").gsub('_', ' ')
@@ -37,11 +65,11 @@ class UsersController < ApplicationController
 
 
   def new_profile
-    if current_user != nil && (current_user.comedian_name.blank? && current_user.producer_name.blank?)
+    if current_user != nil && (current_user.is_not_comedian? && current_user.is_not_producer?)
       the_id = current_user.id
       @the_user = User.where({ :id => the_id }).at(0)
       render({ :template => "users/new_profile" })
-      elsif current_user != nil && (current_user.comedian_name.present? || current_user.producer_name.present?)
+      elsif current_user != nil && (current_user.is_comedian? || current_user.is_producer?)
       redirect_to("/", notice: "You already chose roles. You can edit your role and bio in edit profile.")
       else
       redirect_to("/users/sign_in", notice: "You have to sign in to choose role and edit profile.")
