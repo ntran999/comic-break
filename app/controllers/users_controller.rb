@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  def get_index_comedian
+  def index_comedian
 
-    comedian_name = params.fetch("query_name","")
+    comedian_name = params.fetch("comedian_name","")
     comedian_name = comedian_name.strip
 
-    location = params.fetch("query_location","")
+    location = params.fetch("comedian_location","")
     location = location.strip
 
       if comedian_name.empty? && location.empty?

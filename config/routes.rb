@@ -4,11 +4,9 @@ Rails.application.routes.draw do
 }
   # Routes for the User resource:
 
-  ## SEARCH
-  # post("/comedians", { :controller => "users", :action => "post_index_comedian" })
 
   # # READ
-  get("/comedians", { :controller => "users", :action => "get_index_comedian" })
+  get("/comedians", { :controller => "users", :action => "index_comedian" })
   
   get("/comedians/:path_id", { :controller => "users", :action => "show_comedian" })
 
@@ -21,8 +19,6 @@ Rails.application.routes.draw do
   get("/users/new_role", { :controller => "users", :action => "new_role" })
 
   
-
-
   ## UPDATE
 
   post("/users/save_new_profile", { :controller => "users", :action => "save_new_profile" })

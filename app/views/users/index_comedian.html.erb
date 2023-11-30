@@ -7,6 +7,12 @@
 </div>
 
 <hr>
+<% if @list_of_users.count == 0 %>
+
+<p> There is no comedian matching your search! </p>
+
+<% else %>
+
 <div>
   <div>
     <table border="1">
@@ -74,5 +80,7 @@
     </table>
   </div>
 </div>
+
+<% end %>
 
 <hr>

@@ -5,11 +5,33 @@ class ShowsController < ApplicationController
 
 
   def index
-    matching_shows = Show.all
-    
-    ##where('date >= ?', Time.now)
 
-    @list_of_shows = matching_shows.order({ :date => :asc })
+    location = params.fetch("show_location","")
+    location = location.strip
+
+    start_time = params.fetch("start_time","")
+    end_time = params.fetch("end_time","")
+    
+    if start_time.empty? && location.empty? && end_time.empty?
+
+      matching_shows = Show.all
+      
+      ##where('date >= ?', Time.now)
+
+      @list_of_shows = matching_shows.order({ :date => :asc })
+
+    elsif location.present? && end_time.empty? &&  start_time.empty?
+      matching_shows = Show.where.not('date >= ?', Time.now).where("city LIKE ? OR state LIKE ?", "%#{location}%", "%#{location}%")
+
+      @list_of_shows = matching_shows.order({ :date => :asc })
+
+    elsif location.present? && end_time.empty? &&  start_time.present?
+      matching_shows = Show.where.not('date >= ?', Time.now).where("location LIKE ?", "%#{location}%")
+
+      @list_of_shows = matching_shows.order({ :date => :asc })
+
+    end
+
 
     render({ :template => "shows/index" })
   end

@@ -1,24 +1,52 @@
+<h3> Comedians </h3>
 <div>
-<h3> Comedian </h3>
-      <form action="/comedians" method="get">
+  <form action="/comedians" method="get">
+    <div>
+      <label for="comedian_name_box">
+        Comedian Name
+      </label>
+      <input type="text" id="comedian_name_box" name="comedian_name">
+    </div>
 
-          <div>
-            <label for="name_box">
-              Comedian Name
-            </label>
+    <div>
+      <label for="comedian_location_box">
+        Location
+      </label>
+      <input type="text" id="comedian_location_box" name="comedian_location">
+    </div>
 
-            <input type="text" id="name_box" name="query_name">
-          </div>
-          <div>
-            <label for="location_box">
-              Location
-            </label>
+    <button type="submit">
+      Search
+    </button>
+  </form>
+</div>
 
-            <input type="text" id="location_box" name="query_location">
-          </div>
-
-          <button>
-            Search
-          </button>          
-
+<h3> Shows </h3>
 <div>
+  <form action="/shows" method="get">
+    <div>
+      <label for="show_location_box">
+        Location
+      </label>
+      <input type="text" id="show_location_box" name="show_location">
+    </div>
+
+    <div>
+      <label for="start_time_box">
+        Start
+      </label>
+      <input type="date" id="start_time_box" name="start_time">
+    </div>
+
+    <div>
+      <label for="end_time_box">
+        End
+      </label>
+      <input type="date" id="end_time_box" name="end_time">
+    </div>
+
+    <button type="submit">
+      Search
+    </button>
+  </form>
+</div>
