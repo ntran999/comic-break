@@ -35,44 +35,49 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :short_comedian_bio, length: { maximum: 150 }
 
-has_many  :show_sign_ups, class_name: "ShowSignUp", foreign_key: "user_id", dependent: :destroy
-has_many  :shows, class_name: "Show", foreign_key: "user_id", dependent: :destroy
-has_many  :comic_styles, class_name: "ComicStyle", foreign_key: "user_id", dependent: :destroy
-has_many  :favorite_shows, class_name: "FavoriteShow", foreign_key: "user_id", dependent: :destroy
+  has_many :show_sign_ups, class_name: "ShowSignUp", foreign_key: "user_id", dependent: :destroy
+  has_many :shows, class_name: "Show", foreign_key: "user_id", dependent: :destroy
+  has_many :comic_styles, class_name: "ComicStyle", foreign_key: "user_id", dependent: :destroy
+  has_many :favorite_shows, class_name: "FavoriteShow", foreign_key: "user_id", dependent: :destroy
 
+  scope :location_cont, ->(query) {
+      where("city LIKE :query OR state LIKE :query", query: "%#{query}%")
+    }
+  def self.ransackable_attributes(auth_object = nil)
+    ["city", "comedian_bio", "comedian_name", "comedian_profile_pic", "name", "producer_bio", "producer_name", "producer_profile_pic", "short_comedian_bio", "show_sign_ups_count", "shows_count", "state", "updated_at"]
+  end
 
-def is_comedian?
-  comedian_name.present?
-end 
+  def self.ransackable_scopes(auth_object = nil)
+    %i[location_cont]
+  end
 
-def is_producer?
-  producer_name.present?
-end
+  def self.ransackable_associations(auth_object = nil)
+    ["comic_styles", "favorite_shows", "show_sign_ups", "shows"]
+  end
 
-def is_producer_and_comedian?
-  producer_name.present? && comedian_name.present?
-end
+  def is_producer?
+    producer_name.present?
+  end
 
-def is_not_comedian?
-  !is_comedian?
-end
+  def is_producer_and_comedian?
+    producer_name.present? && comedian_name.present?
+  end
 
-def is_not_producer?
-  !is_producer?
-end
+  def is_not_comedian?
+    !is_comedian?
+  end
 
-def has_signed_up_for_show?(show_id)
-  show_sign_up = ShowSignUp.find_by(user_id: id, show_id: show_id)
-  show_sign_up.present?
-end
+  def is_not_producer?
+    !is_producer?
+  end
 
-def has_favorite_for_show?(show_id)
-  show_favorite = FavoriteShow.find_by(user_id: id, show_id: show_id)
-  show_favorite.present?
-end
+  def has_signed_up_for_show?(show_id)
+    show_sign_up = ShowSignUp.find_by(user_id: id, show_id: show_id)
+    show_sign_up.present?
+  end
 
-def self.ransackable_attributes(auth_object = nil)
-  ["city", "comedian_bio", "comedian_name", "comedian_profile_pic", "name", "producer_bio", "producer_name", "producer_profile_pic", "short_comedian_bio", "show_sign_ups_count", "shows_count", "state", "updated_at"]
-end
-
+  def has_favorite_for_show?(show_id)
+    show_favorite = FavoriteShow.find_by(user_id: id, show_id: show_id)
+    show_favorite.present?
+  end
 end

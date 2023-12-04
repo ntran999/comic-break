@@ -1,17 +1,19 @@
 <h3> Comedians </h3>
-<%#= search_form_for @q1 do |f| %>
 <%= search_form_for @q1, url: comedians_path, method: :get do |f| %>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
       <%= f.label :comedian_name_cont, 'Name' %>
       <%= f.text_field :comedian_name_cont, class: 'form-control' %>
     </div>
 
-   <div class="row">
-    <div class="col-md-4">
-      <%= f.label :city_cont, 'Location' %>
-      <%= f.text_field :city_cont, class: 'form-control' %>
+   
+    <div class="col-md-5">
+      <%#= f.label :city_cont, 'Location' %>
+      <%#= f.text_field :city_cont, class: 'form-control' %>
+      <%= f.label :location_cont, 'Location' %>
+      <%= f.text_field :location_cont, class: 'form-control' %>
     </div>
+  </div>
 
   <div class="row mt-3">
     <div class="col-md-12">
@@ -21,59 +23,9 @@
     </div>
   </div>
 <% end %>
-<!--<div>
-  <form action="/comedians" method="get">
-    <div>
-      <label for="comedian_name_box">
-        Comedian Name
-      </label>
-      <input type="text" id="comedian_name_box" name="comedian_name">
-    </div>
 
-    <div>
-      <label for="comedian_location_box">
-        Location
-      </label>
-      <input type="text" id="comedian_location_box" name="comedian_location">
-    </div>
-
-    <button type="submit">
-      Search
-    </button>
-  </form>
-</div>-->
 
 <h3> Shows </h3>
-<!--<div>
-  <form action="/shows" method="get">
-    <div>
-      <label for="show_location_box">
-        Location
-      </label>
-      <input type="text" id="show_location_box" name="show_location">
-    </div>
-
-    <div>
-      <label for="start_time_box">
-        Start
-      </label>
-      <input type="date" id="start_time_box" name="start_time">
-    </div>
-
-    <div>
-      <label for="end_time_box">
-        End
-      </label>
-      <input type="date" id="end_time_box" name="end_time">
-    </div>
-
-    <button type="submit">
-      Search
-    </button>
-  </form>
-</div>-->
-
-<%#= search_form_for @q do |f| %>
 <%= search_form_for @q2, url: shows_path, method: :get do |f| %>
   <div class="row">
     <div class="col-md-4">
