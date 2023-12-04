@@ -107,7 +107,7 @@
 <hr>
 
 <!--Edit Show - Only for Show Producer - Maybe Making This A Pop Up-->
-<% if current_user.id == @the_show.user.id %>
+<% if current_user != nil && current_user.id == @the_show.user.id %>
 <div>
   <div>
     <h2>
