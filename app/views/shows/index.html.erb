@@ -7,6 +7,13 @@
 </div>
 
 <hr>
+
+<% if @list_of_shows.count == 0 %>
+
+<p> There is no show matching your search! </p>
+
+<% else %>
+
 <div>
   <div id="map" style='width: 800px; height: 400px;'></div>
 </div>
@@ -130,3 +137,5 @@ async defer></script>
 </div>
 
 <hr>
+
+<% end %>

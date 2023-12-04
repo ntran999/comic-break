@@ -29,8 +29,10 @@
 <%= search_form_for @q2, url: shows_path, method: :get do |f| %>
   <div class="row">
     <div class="col-md-4">
-      <%= f.label :city_cont, 'Location' %>
-      <%= f.text_field :city_cont, class: 'form-control' %>
+      <%#= f.label :city_cont, 'Location' %>
+      <%#= f.text_field :city_cont, class: 'form-control' %>
+      <%= f.label :location_cont, 'Location' %>
+      <%= f.text_field :location_cont, class: 'form-control' %>
     </div>
 
     <div class="col-md-4">

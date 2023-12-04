@@ -59,6 +59,10 @@ class User < ApplicationRecord
     producer_name.present?
   end
 
+  def is_comedian?
+    comedian_name.present?
+  end
+
   def is_producer_and_comedian?
     producer_name.present? && comedian_name.present?
   end

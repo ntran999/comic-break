@@ -34,7 +34,20 @@ class Show < ApplicationRecord
     time < Time.now
   end
 
+  scope :location_cont, ->(query) {
+      where("city LIKE :query OR state LIKE :query", query: "%#{query}%")
+    }
+  
   def self.ransackable_attributes(auth_object = nil)
     ["address", "city", "created_at", "date", "description", "google_api_address", "id", "image", "name", "show_sign_ups_count", "show_type_id", "state", "time", "updated_at", "user_id", "venue_name", "zip"]
   end
+
+  def self.ransackable_scopes(auth_object = nil)
+    %i[location_cont]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["favorite_shows", "show_sign_ups", "show_type", "user"]
+  end
+
 end
