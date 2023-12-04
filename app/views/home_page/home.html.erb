@@ -1,5 +1,6 @@
 <h3> Comedians </h3>
-<%= search_form_for @q do |f| %>
+<%#= search_form_for @q1 do |f| %>
+<%= search_form_for @q1, url: comedians_path, method: :get do |f| %>
   <div class="row">
     <div class="col-md-4">
       <%= f.label :comedian_name_cont, 'Name' %>
@@ -16,7 +17,7 @@
     <div class="col-md-12">
       <%= f.submit 'Search', class: 'btn btn-primary' %>
       <%#= link_to 'Clear Filters', shows_path(q: nil), class: 'btn btn-secondary' %>
-<!---->    
+<!--    -->
     </div>
   </div>
 <% end %>
@@ -72,7 +73,8 @@
   </form>
 </div>-->
 
-<%= search_form_for @q do |f| %>
+<%#= search_form_for @q do |f| %>
+<%= search_form_for @q2, url: shows_path, method: :get do |f| %>
   <div class="row">
     <div class="col-md-4">
       <%= f.label :city_cont, 'Location' %>
@@ -94,7 +96,7 @@
     <div class="col-md-12">
       <%= f.submit 'Search', class: 'btn btn-primary' %>
       <%#= link_to 'Clear Filters', shows_path(q: nil), class: 'btn btn-secondary' %>
-<!---->    
+<!--    -->
     </div>
   </div>
 <% end %>

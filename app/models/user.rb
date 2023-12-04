@@ -71,4 +71,8 @@ def has_favorite_for_show?(show_id)
   show_favorite.present?
 end
 
+def self.ransackable_attributes(auth_object = nil)
+  ["city", "comedian_bio", "comedian_name", "comedian_profile_pic", "name", "producer_bio", "producer_name", "producer_profile_pic", "short_comedian_bio", "show_sign_ups_count", "shows_count", "state", "updated_at"]
+end
+
 end

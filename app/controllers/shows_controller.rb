@@ -1,22 +1,20 @@
 class ShowsController < ApplicationController
   def home
-    # @q = Ransack::Search.new(Show, params.fetch("q", {}))
-    # # puts params
-    # # @q = Show.ransack(params[:q])
-
-    # @list_of_shows = @q.result.order({ :date => :asc })
-
-    @q = Show.ransack(params[:q])
   
-    # @list_of_shows = @q.result
+    @q1 = User.ransack(params[:q])
 
-    render({ :template => "shows/home" })
+    @q2 = Show.ransack(params[:q])
+
+    render({ :template => "home_page/home" })
   end
 
   def index
     
-    @q = Show.ransack(params[:q])
-    @list_of_shows = @q.result.order({ :date => :asc })
+    # @q = Show.ransack(params[:q])
+    # @list_of_shows = @q.result.order({ :date => :asc })
+
+    @q2 = Show.ransack(params[:q])
+    @list_of_shows = @q2.result.order({ :date => :asc })
     
 
     # location = params.fetch("show_location", "").strip

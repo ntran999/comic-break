@@ -132,7 +132,7 @@ Rails.application.routes.draw do
   post("/insert_show", { :controller => "shows", :action => "create" })
           
   # READ
-  get("/", { :controller => "shows", :action => "home" })
+  get("/", { :controller => "home", :action => "home" })
 
   get("/shows", { :controller => "shows", :action => "index" })
   

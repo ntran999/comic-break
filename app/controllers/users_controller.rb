@@ -1,14 +1,10 @@
 class UsersController < ApplicationController
-  def home
-    @q = User.ransack(params[:q])
   
-    render({ :template => "shows/home" })
-  end
 
   def index_comedian
 
-    @q = Show.ransack(params[:q])
-    @list_of_users = @q.result.where(is_comedian: true).order({ :name => :asc })
+    @q1 = User.ransack(params[:q])
+    @list_of_users = @q1.result.where.not(comedian_name: nil).order({ :name => :asc })
     
 
     # comedian_name = params.fetch("comedian_name","")
