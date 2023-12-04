@@ -1,28 +1,38 @@
 class UsersController < ApplicationController
+  def home
+    @q = User.ransack(params[:q])
+  
+    render({ :template => "shows/home" })
+  end
+
   def index_comedian
 
-    comedian_name = params.fetch("comedian_name","")
-    comedian_name = comedian_name.strip
+    @q = Show.ransack(params[:q])
+    @list_of_users = @q.result.where(is_comedian: true).order({ :name => :asc })
+    
 
-    location = params.fetch("comedian_location","")
-    location = location.strip
+    # comedian_name = params.fetch("comedian_name","")
+    # comedian_name = comedian_name.strip
 
-      if comedian_name.empty? && location.empty?
-      matching_users = User.where.not(comedian_name: nil)
-      @list_of_users = matching_users.order({ :name => :asc })
+    # location = params.fetch("comedian_location","")
+    # location = location.strip
 
-      elsif comedian_name.present? && location.empty?
-        matching_users = User.where.not(comedian_name: nil).where("comedian_name LIKE ?", "%#{comedian_name}%")
-        @list_of_users = matching_users.order(name: :asc)
+    #   if comedian_name.empty? && location.empty?
+    #   matching_users = User.where.not(comedian_name: nil)
+    #   @list_of_users = matching_users.order({ :name => :asc })
 
-      elsif comedian_name.empty? && location.present?
-        matching_users = User.where.not(comedian_name: nil).where("city LIKE ? OR state LIKE ?", "%#{location}%", "%#{location}%")
-        @list_of_users = matching_users.order(name: :asc)
+    #   elsif comedian_name.present? && location.empty?
+    #     matching_users = User.where.not(comedian_name: nil).where("comedian_name LIKE ?", "%#{comedian_name}%")
+    #     @list_of_users = matching_users.order(name: :asc)
 
-      else
-        matching_users = User.where.not(comedian_name: nil).where("comedian_name LIKE ? AND (city LIKE ? OR state LIKE ?)", "%#{search_input}%", "%#{location}%", "%#{location}%")
-        @list_of_users = matching_users.order(name: :asc)
-      end
+    #   elsif comedian_name.empty? && location.present?
+    #     matching_users = User.where.not(comedian_name: nil).where("city LIKE ? OR state LIKE ?", "%#{location}%", "%#{location}%")
+    #     @list_of_users = matching_users.order(name: :asc)
+
+    #   else
+    #     matching_users = User.where.not(comedian_name: nil).where("comedian_name LIKE ? AND (city LIKE ? OR state LIKE ?)", "%#{search_input}%", "%#{location}%", "%#{location}%")
+    #     @list_of_users = matching_users.order(name: :asc)
+    #   end
     
     
     render({ :template => "users/index_comedian" })
@@ -123,7 +133,7 @@ class UsersController < ApplicationController
       
     if @the_user.valid?
       @the_user.save
-      redirect_to("/comedians/#{current_user.comedian_name.gsub(' ', '_')}", { :notice => "Comedian bio updated successfully."} )
+      redirect_to("/comedians/#{@the_user.comedian_name.gsub(' ', '_')}", { :notice => "Comedian bio updated successfully."} )
     else
       redirect_to("/", { :alert => the_show.errors.full_messages.to_sentence })
     end
@@ -139,7 +149,7 @@ class UsersController < ApplicationController
 
     if @the_user.valid?
       @the_user.save
-      redirect_to("/producers/#{current_user.producer_name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
+      redirect_to("/producers/#{@the_user.producer_name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
     else
       redirect_to("/", { :alert => the_show.errors.full_messages.to_sentence })
     end
@@ -166,7 +176,7 @@ class UsersController < ApplicationController
       end
     if @the_user.valid?
       @the_user.save
-      redirect_to("/comedians/#{current_user.comedian_name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
+      redirect_to("/comedians/#{@the_user.comedian_name.gsub(' ', '_')}", { :notice => "Producer bio updated successfully."} )
     else
       redirect_to("/", { :alert => the_show.errors.full_messages.to_sentence })
     end

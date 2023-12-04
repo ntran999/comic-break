@@ -21,19 +21,20 @@
 #  user_id             :integer
 #
 class Show < ApplicationRecord
+  belongs_to :user, required: true, class_name: "User", foreign_key: "user_id", counter_cache: true
+  has_many :show_sign_ups, class_name: "ShowSignUp", foreign_key: "show_id", dependent: :destroy
+  has_many :favorite_shows, class_name: "FavoriteShow", foreign_key: "show_id", dependent: :destroy
+  belongs_to :show_type, required: true, class_name: "ShowType", foreign_key: "show_type_id", counter_cache: true
 
+  def is_current?
+    time >= Time.now
+  end
 
-belongs_to :user, required: true, class_name: "User", foreign_key: "user_id", counter_cache: true
-has_many  :show_sign_ups, class_name: "ShowSignUp", foreign_key: "show_id", dependent: :destroy
-has_many  :favorite_shows, class_name: "FavoriteShow", foreign_key: "show_id", dependent: :destroy
-belongs_to :show_type, required: true, class_name: "ShowType", foreign_key: "show_type_id", counter_cache: true
+  def is_archived?
+    time < Time.now
+  end
 
-def is_current?
-  time >= Time.now
-end
-
-def is_archived?
-  time < Time.now
-end
-  
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "city", "created_at", "date", "description", "google_api_address", "id", "image", "name", "show_sign_ups_count", "show_type_id", "state", "time", "updated_at", "user_id", "venue_name", "zip"]
+  end
 end

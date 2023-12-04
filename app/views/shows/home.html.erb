@@ -1,5 +1,26 @@
 <h3> Comedians </h3>
-<div>
+<%= search_form_for @q do |f| %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :comedian_name_cont, 'Name' %>
+      <%= f.text_field :comedian_name_cont, class: 'form-control' %>
+    </div>
+
+   <div class="row">
+    <div class="col-md-4">
+      <%= f.label :city_cont, 'Location' %>
+      <%= f.text_field :city_cont, class: 'form-control' %>
+    </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <%= f.submit 'Search', class: 'btn btn-primary' %>
+      <%#= link_to 'Clear Filters', shows_path(q: nil), class: 'btn btn-secondary' %>
+<!---->    
+    </div>
+  </div>
+<% end %>
+<!--<div>
   <form action="/comedians" method="get">
     <div>
       <label for="comedian_name_box">
@@ -19,10 +40,10 @@
       Search
     </button>
   </form>
-</div>
+</div>-->
 
 <h3> Shows </h3>
-<div>
+<!--<div>
   <form action="/shows" method="get">
     <div>
       <label for="show_location_box">
@@ -49,4 +70,31 @@
       Search
     </button>
   </form>
-</div>
+</div>-->
+
+<%= search_form_for @q do |f| %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :city_cont, 'Location' %>
+      <%= f.text_field :city_cont, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :date_gteq, 'Start Time' %>
+      <%= f.date_field :date_gteq, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :date_lteq, 'End Time' %>
+      <%= f.date_field :date_lteq, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <%= f.submit 'Search', class: 'btn btn-primary' %>
+      <%#= link_to 'Clear Filters', shows_path(q: nil), class: 'btn btn-secondary' %>
+<!---->    
+    </div>
+  </div>
+<% end %>
