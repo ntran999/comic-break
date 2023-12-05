@@ -1,11 +1,11 @@
 <div>
   <div>
-    <h1>
-     <%= @the_show.name %>
-    </h1>
-    <h5>
-    By <a href="/producers/<%= @the_show.user.producer_name.gsub(" ","_")%>"><%= @the_show.user.producer_name%></a>
-    </h5>
+    <h2>
+      <%= @the_show.name %>
+    </h2>
+    <h6>
+      By <a href="/producers/<%= @the_show.user.producer_name.gsub(" ","_")%>"><%= @the_show.user.producer_name%></a>
+    </h6>
 
     <div>
       <div>
@@ -17,13 +17,11 @@
     </div>
 
     <dl>
-      
-      
+
       <dt>
         <img src="<%= @the_show.image%>" style = "width:250px;">
       </dt>
 
-      
       <dt>
         <%= @the_show.date.strftime('%a, %b %d') %> <%= @the_show.date.strftime('%I:%M %p') %>
       </dt>
@@ -41,18 +39,15 @@
       <dd>
         <%= @the_show.venue_name %>
       </dd>
-      
 
       <div>
-      <dd>
-        <%= @the_show.address %>
-        <div>
-        <%= @the_show.city %>, <%= @the_show.state %>
-        </div>
-      </dd>
+        <dd>
+          <%= @the_show.address %>
+          <div>
+            <%= @the_show.city %>, <%= @the_show.state %>
+          </div>
+        </dd>
       </div>
-
-      
 
       <dt>
         Show type
@@ -61,7 +56,6 @@
         <%= @the_show.show_type.name %>
       </dd>
 
-     
     </dl>
   </div>
 </div>
@@ -70,43 +64,38 @@
 
 <!--Sign up Book mark form-->
 <div>
-<% if current_user != nil && current_user.comedian_name.present?%>
-  <% if !current_user.has_signed_up_for_show?(@the_show.id) %>
-  
-  <form action="/insert_show_sign_up/<%= @the_show.id %>" method="post">
-    <input type="hidden" name="_method" value="post">
-    <button type="submit">Sign up</button>
-  </form>
-  
-  <% elsif current_user.has_signed_up_for_show?(@the_show.id) %>
-  <form action="/delete_show_sign_up/<%= @the_show.id %>" method="post">
-    <input type="hidden" name="_method" value="post">
-    <button type="submit">Withdraw from Sign up</button>
-  </form>
-  <% end %>
+  <% if current_user != nil && current_user.comedian_name.present? %>
+    <div class="d-flex justify-content-start gap-3">
+      <% if !current_user.has_signed_up_for_show?(@the_show.id) %>
+        <form action="/insert_show_sign_up/<%= @the_show.id %>" method="post">
+          <input type="hidden" name="_method" value="post">
+          <button type="submit" class="btn btn-primary">Sign up</button>
+        </form>
+      <% elsif current_user.has_signed_up_for_show?(@the_show.id) %>
+        <form action="/delete_show_sign_up/<%= @the_show.id %>" method="post">
+          <input type="hidden" name="_method" value="post">
+          <button type="submit" class="btn btn-primary">Withdraw from Sign up</button>
+        </form>
+      <% end %>
 
-   <% if !current_user.has_favorite_for_show?(@the_show.id) %>
-  
-  <form action="/insert_favorite_show/<%= @the_show.id %>" method="post">
-    <input type="hidden" name="_method" value="post">
-    <button type="submit">Bookmark</button>
-  </form>
-  
-  <% elsif current_user.has_favorite_for_show?(@the_show.id) %>
-  <form action="/delete_favorite_show/<%= @the_show.id %>" method="post">
-    <input type="hidden" name="_method" value="post">
-    <button type="submit">Bookmarked</button>
-  </form>
-  <% end %>
-
+      <% if !current_user.has_favorite_for_show?(@the_show.id) %>
+        <form action="/insert_favorite_show/<%= @the_show.id %>" method="post">
+          <input type="hidden" name="_method" value="post">
+          <button type="submit" class="btn btn-primary">Bookmark</button>
+        </form>
+      <% elsif current_user.has_favorite_for_show?(@the_show.id) %>
+        <form action="/delete_favorite_show/<%= @the_show.id %>" method="post">
+          <input type="hidden" name="_method" value="post">
+          <button type="submit" class="btn btn-primary">Bookmarked</button>
+        </form>
+      <% end %>
+    </div>
   <% else %>
-
-  <p> You have to <a href="/users/sign_in">sign in</a> to sign up and bookmark the show! <p>
-
+    <p>You have to <a href="/users/sign_in">sign in</a> to sign up and bookmark the show!</p>
   <% end %>
-  </div>
+</div>
 <hr>
-<h3> Comedians Signed Up For The Show </h3>
+<h5> Comedians Signed Up For The Show </h5>
 
 <ol>
   <% @the_show.show_sign_ups.order(date: :desc).each do |a_sign_up| %>
@@ -117,120 +106,118 @@
   <% end %>
 </ol>
 
-
 <hr>
 
 <!--Edit Show - Only for Show Producer - Maybe Making This A Pop Up-->
 <% if current_user != nil && current_user.id == @the_show.user.id %>
-<div>
   <div>
-    <h2>
-      Edit show
-    </h2>
+    <div>
+      <h5>
+        Edit show
+      </h5>
 
-    <form action="/modify_show/<%= @the_show.id %>"  method="post" >
-      
-      <div>
-        <label for="image_box">
-          Image
-        </label>
+      <form action="/modify_show/<%= @the_show.id %>"  method="post" >
 
-        <input type="text" id="image_box" name="query_image" value="<%= @the_show.image %>">
-      </div>
+        <div>
+          <label for="image_box">
+            Image
+          </label>
 
+          <input type="text" id="image_box" name="query_image" value="<%= @the_show.image %>">
+        </div>
 
-      <div>
-        <label for="name_box">
-          Name
-        </label>
+        <div>
+          <label for="name_box">
+            Name
+          </label>
 
-        <input type="text" id="name_box" name="query_name" value="<%= @the_show.name %>">
-      </div>
+          <input type="text" id="name_box" name="query_name" value="<%= @the_show.name %>">
+        </div>
 
-      <div>
-        <label for="date_box">
-          Date
-        </label>
+        <div>
+          <label for="date_box">
+            Date
+          </label>
 
-        <input type="datetime-local" id="date_box" name="query_date"
+          <input type="datetime-local" id="date_box" name="query_date"
          value="<%= @the_show.date.strftime('%Y-%m-%dT%H:%M') %>">
+        </div>
+
+        <div>
+          <label for="description_box">
+            Description
+          </label>
+
+          <textarea id="description_box" name="query_description"><%= @the_show.description %></textarea>
+        </div>
+
+        <div>
+          <label for="venue_box">
+            Venue
+          </label>
+
+          <input type="text" id="venue_box" name="query_venue" value="<%= @the_show.venue_name %>">
+        </div>
+
+        <div>
+          <label for="address_box">
+            Address
+          </label>
+
+          <textarea id="address_box" name="query_address"><%= @the_show.address %></textarea>
+        </div>
+
+        <div>
+          <label for="city_box">
+            City
+          </label>
+
+          <input type="text" id="city_box" name="query_city" value="<%= @the_show.city %>">
+        </div>
+
+        <div>
+          <label for="state_box">
+            State
+          </label>
+
+          <input type="text" id="state_box" name="query_state" value="<%= @the_show.state %>">
+        </div>
+
+        <div>
+          <label for="zip_box">
+            Zip
+          </label>
+
+          <input type="text" id="zip_box" name="query_zip" value="<%= @the_show.zip %>">
+        </div>
+
+        <div>
+          <label for="show_type_id_box">
+            Show type
+          </label>
+
+          <select id="show_type_id_box" name="query_show_type_name" value="<%= @the_show.show_type.name %>">
+            <% ShowType.all.each do |show_type| %>
+              <option value="<%= show_type.name %>"><%= show_type.name %></option>
+            <% end %>
+          </select>
+
+          <hr>
+          
+          <div class="d-flex justify-content-start gap-3">
+
+            <button class="btn btn-primary">
+              Update show
+            </button>
+
+            <button href="/delete_show/<%= @the_show.id %>" class="btn btn-primary">
+              Delete show
+            </button>
+          </div>
+        </form>
       </div>
+    </div>
+  <% else %>
+  <% end %>
 
-      <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <textarea id="description_box" name="query_description"><%= @the_show.description %></textarea>
-      </div>
-
-      <div>
-        <label for="venue_box">
-          Venue
-        </label>
-
-        <input type="text" id="venue_box" name="query_venue" value="<%= @the_show.venue_name %>">
-      </div>
-
-
-      <div>
-        <label for="address_box">
-          Address
-        </label>
-
-        <textarea id="address_box" name="query_address"><%= @the_show.address %></textarea>
-      </div>
-
-      <div>
-        <label for="city_box">
-          City
-        </label>
-
-        <input type="text" id="city_box" name="query_city" value="<%= @the_show.city %>">
-      </div>
-
-      <div>
-        <label for="state_box">
-          State
-        </label>
-
-        <input type="text" id="state_box" name="query_state" value="<%= @the_show.state %>">
-      </div>
-
-      <div>
-        <label for="zip_box">
-          Zip
-        </label>
-
-        <input type="text" id="zip_box" name="query_zip" value="<%= @the_show.zip %>">
-      </div>
-
-      <div>
-        <label for="show_type_id_box">
-          Show type
-        </label>
-
-      <select id="show_type_id_box" name="query_show_type_name" value="<%= @the_show.show_type.name %>">
-        <% ShowType.all.each do |show_type| %>
-          <option value="<%= show_type.name %>"><%= show_type.name %></option>
-        <% end %>
-      </select>  
-
-      <div>
-      <button>
-        Update show
-      </button>
-      
-
-      
-        <button href="/delete_show/<%= @the_show.id %>">
-          Delete show
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-<% else %>
-<% end %>
-
-<hr>
+  <hr>
