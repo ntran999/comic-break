@@ -1,116 +1,76 @@
+<h2>
+  <%= @the_user.comedian_name %>
+</h2>
+
 <div>
   <div>
-    <h1>
-      <%= @the_user.comedian_name %>
-    </h1>
-
-    <div>
-      <div>
-        <a href="/comedians">
-          Go back
-        </a>
-      </div>
-
-    </div>
-
-    <dl>
-      
-      <dd>
-        <img src="<%= @the_user.comedian_profile_pic %>" style = "width:250px;">
-      </dd>
-
-      <dt>
-        Bio
-      </dt>
-      <dd>
-        <%= @the_user.comedian_bio %>
-      </dd>
-
-      <dt>
-        Location
-      </dt>
-      <dd>
-        <%= @the_user.city %>, <%= @the_user.state %>
-      </dd>
-
-      <dt>Comedian Style</dt>
-      <dd>
-          <% @the_user.comic_styles.all.each do |comic_style| %>
-          <ul>
-          <li><%= comic_style.comedy_style.name %></li>
-          </ul>
-          <% end %>
-        </dd>
+    <a href="/comedians">
+      Go back
+    </a>
   </div>
+</div>
+
+<dl>
+
+  <dd>
+    <img src="<%= @the_user.comedian_profile_pic %>" style = "width:250px;">
+  </dd>
+
+  <dt>
+    Bio
+  </dt>
+  <dd>
+    <%= @the_user.comedian_bio %>
+  </dd>
+
+  <dt>
+    Location
+  </dt>
+  <dd>
+    <%= @the_user.city %>, <%= @the_user.state %>
+  </dd>
+
+  <dt>Comedian Style</dt>
+  <dd>
+    <% @the_user.comic_styles.all.each do |comic_style| %>
+      <ul>
+        <li><%= comic_style.comedy_style.name %></li>
+      </ul>
+    <% end %>
+  </dd>
+
 </div>
 
 <hr>
 
 <% if @the_user.show_sign_ups.count > 0 %>
-<h4> Shows Performed </h4>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          Image
-        </th>
+  <h4> Shows Performed </h4>
 
-        <th>
-          Name
-        </th>
-
-        <th>
-          Date
-        </th>
-
-        <th>
-          Time
-        </th>
-
-        <th>
-          Show type
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @the_user.show_sign_ups.includes(:show).where("shows.date < ?", Time.current).order("shows.date DESC").each do |a_sign_up| %>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @the_user.show_sign_ups.includes(:show).where("shows.date < ?", Time.current).order("shows.date DESC").each do |a_sign_up| %>
       <% a_show = a_sign_up.show %>
-      
-      <tr>
-        <td>
-          <img src="<%= a_show.image%>" style = "width:250px;">
-        </td>
-
-        <td>
-          <%= a_show.name %>
-        </td>
-
-        <td>
-          <%= a_show.date.strftime('%a, %b %d') %>
-        </td>
-
-        <td>
-          <%= a_show.date.strftime('%I:%M %p') %>
-        </td>
-
-        <td>
-          <%= a_show.show_type.name %>
-        </td>
-
-        <td>
-          <a href="/shows/<%= a_show.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+      <div class="col">
+        <div class="card h-100">
+          <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+          <div class="card-body">
+            <h5 class="card-title"><%= a_show.name %></h5>
+            <p class="card-text">
+              <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+              <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+              <strong>Venue:</strong> <%= a_show.venue_name %><br>
+              <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+              <strong>Show Type:</strong> <%= a_show.show_type.name %>
+            </p>
+          </div>
+          <hr>
+          <div class="card-footer">
+            <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-</div>
 <hr>
 <% else %>
-<%= @the_user.comedian_name %> has not signed up for any show at the moment. 
+  <%= @the_user.comedian_name %> has not signed up for any show at the moment. 
 <% end %>

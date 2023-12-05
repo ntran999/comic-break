@@ -1,8 +1,8 @@
 <div>
   <div>
-    <h1>
+    <h2>
       <%= @the_user.producer_name %>
-    </h1>
+    </h2>
 
     <div>
       <div>
@@ -38,84 +38,33 @@
 
 <hr>
 <% if @the_user.shows.count > 0 %>
-<h3> Shows Produced </h3>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          Image
-        </th>
+<h4> Shows Produced </h4>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+       <% @the_user.shows.order(date: :desc).each do |a_show| %>
 
-        <th>
-          Name
-        </th>
-
-        <th>
-          Date
-        </th>
-
-        <th>
-          Time
-        </th>
-
-        <th>
-          Venue 
-        </th>
-
-        <th>
-          Address 
-        </th>
-
-        <th>
-          Show type
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @the_user.shows.order(date: :desc).each do |a_show| %>
-      <tr>
-        <td>
-          <img src="<%= a_show.image%>" style = "width:250px;">
-        </td>
-
-        <td>
-          <%= a_show.name %>
-        </td>
-
-        <td>
-          <%= a_show.date.strftime('%a, %b %d') %>
-        </td>
-
-        <td>
-          <%= a_show.date.strftime('%I:%M %p') %>
-        </td>
-
-        <td>
-          <%= a_show.venue_name %>
-        </td>
-
-        <td>
-          <%= a_show.address %>
-          <div>
-          <%= a_show.city %>, <%= a_show.state %>
-        </td>
-
-        <td>
-          <%= a_show.show_type.name %>
-        </td>
-
-        <td>
-          <a href="/shows/<%= a_show.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+        <div class="col">
+          <div class="card h-100">
+            <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+            <div class="card-body">
+              <h5 class="card-title"><%= a_show.name %></h5>
+              <p class="card-text">
+                <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+                <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+                <strong>Venue:</strong> <%= a_show.venue_name %><br>
+                <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+                <strong>Show Type:</strong> <%= a_show.show_type.name %>
+              </p>
+            </div>
+            <hr>
+            <div class="card-footer">
+              <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </table>
-  </div>
+    </div>
+
+      
 </div>
 <hr>
 <% else %>

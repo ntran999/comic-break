@@ -1,13 +1,13 @@
-<h3> Comedians </h3>
+<h4> Comedians </h4>
 <%= search_form_for @q1, url: comedians_path, method: :get do |f| %>
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
       <%= f.label :comedian_name_cont, 'Name' %>
       <%= f.text_field :comedian_name_cont, class: 'form-control' %>
     </div>
 
    
-    <div class="col-md-5">
+    <div class="col-md-6">
       <%#= f.label :city_cont, 'Location' %>
       <%#= f.text_field :city_cont, class: 'form-control' %>
       <%= f.label :location_cont, 'Location' %>
@@ -25,7 +25,7 @@
 <% end %>
 
 
-<h3> Shows </h3>
+<h4> Shows </h4>
 <%= search_form_for @q2, url: shows_path, method: :get do |f| %>
   <div class="row">
     <div class="col-md-4">
