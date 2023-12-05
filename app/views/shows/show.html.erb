@@ -68,6 +68,7 @@
 
 <hr>
 
+<!--Sign up Book mark form-->
 <div>
 <% if current_user != nil && current_user.comedian_name.present?%>
   <% if !current_user.has_signed_up_for_show?(@the_show.id) %>
@@ -104,6 +105,19 @@
 
   <% end %>
   </div>
+<hr>
+<h3> Comedians Signed Up For The Show </h3>
+
+<ol>
+  <% @the_show.show_sign_ups.order(date: :desc).each do |a_sign_up| %>
+    <% the_comedian = a_sign_up.user %>
+    <li>
+      <a href="/comedians/<%= the_comedian.comedian_name.gsub(" ","_")%>"><%= the_comedian.comedian_name %></a>
+    </li>
+  <% end %>
+</ol>
+
+
 <hr>
 
 <!--Edit Show - Only for Show Producer - Maybe Making This A Pop Up-->

@@ -45,9 +45,70 @@
 </div>
 
 <hr>
-Shows
+<h4> Shows Performed </h4>
 
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          Image
+        </th>
 
+        <th>
+          Name
+        </th>
+
+        <th>
+          Date
+        </th>
+
+        <th>
+          Time
+        </th>
+
+        <th>
+          Show type
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @the_user.show_sign_ups.includes(:show).where("shows.date < ?", Time.current).order("shows.date DESC").each do |a_sign_up| %>
+      <% a_show = a_sign_up.show %>
+      
+      <tr>
+        <td>
+          <img src="<%= a_show.image%>" style = "width:250px;">
+        </td>
+
+        <td>
+          <%= a_show.name %>
+        </td>
+
+        <td>
+          <%= a_show.date.strftime('%a, %b %d') %>
+        </td>
+
+        <td>
+          <%= a_show.date.strftime('%I:%M %p') %>
+        </td>
+
+        <td>
+          <%= a_show.show_type.name %>
+        </td>
+
+        <td>
+          <a href="/shows/<%= a_show.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
 
 
 <hr>
