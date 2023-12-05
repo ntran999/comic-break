@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>Rails Template</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bootstrap.min.css">
 
+    <%= javascript_importmap_tags %><link rel="stylesheet" href="<%= asset_path('/bootstrap.min.css') %>">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
@@ -18,98 +19,112 @@
 
   </head>
 
-  <nav>
 
-  <% if notice.present? %>
-      <div style="color: green">
-        <%= notice %>
+  <nav class="navbar bg-primary navbar-expand-lg <!--bg-body-tertiary-->">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <a class="navbar-brand" href="/">
+        <div class="logo-image">
+          <img src="<%= asset_path('comedy_break.png') %>" class="img-fluid" alt="ComicBreak Logo">
+        </div>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav mx-auto">
+          <a class="nav-link" href="/comedians">Comedians</a>
+          <a class="nav-link" href="/producers">Producers</a>
+          <a class="nav-link" href="/shows">Shows</a>
+        </div>
       </div>
-    <% end %>
 
-  <% if alert.present? %>
-      <div style="color: red">
-        <%= alert %>
-      </div>
-    <% end %> 
-    
-  <div>
-      <a href="/"> Home </a>
-  </div>
-  <div>
-  <a href="/comedians"> Comedians </a>
-  </div>
-  <div>
-  <a href="/producers"> Producers </a>
-  </div>
-  <div>
-  <a href="/shows"> Shows </a>
-  </div>
+      
 
-  <hr>
+      <% if current_user != nil %>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <% if current_user.is_producer_and_comedian?%>
+              <div>
+                <a href="/producers/<%= current_user.producer_name.gsub(' ', '_')%>"> Producer Profile </a>
+              </div>
+              <div>
+                <a href="/comedians/<%= current_user.comedian_name.gsub(' ', '_')%>"> Comedian Profile </a>
+              </div>
 
+            <% elsif current_user.is_producer?%>
+              <div>
+                <a href="/producers/<%= current_user.producer_name.gsub(' ', '_')%>"> Producer Profile </a>
+              </div>
+            <% elsif current_user.is_comedian?%>
+              <div>
+                <a href="/comedians/<%= current_user.comedian_name.gsub(' ', '_')%>"> Comedian Profile </a>
+              </div>
+            <% end %>
 
-  <% if current_user != nil %>   
-  <div <!--class="custom-dropdown"-->>
-  <button class="dropdown-button">My Account</button>
-  <div class="dropdown-content">
+            <% if current_user.is_not_comedian? && current_user.is_not_producer? %>
+              <div>
+                <a href="/users/new_role"> Become a Comedian/Producer </a>
+              </div>
 
-    <% if current_user.is_producer_and_comedian?%>
-    <div>
-    <a href="/producers/<%= current_user.producer_name.gsub(' ', '_')%>"> Producer Profile </a>
-    </div>
-    <div>
-    <a href="/comedians/<%= current_user.comedian_name.gsub(' ', '_')%>"> Comedian Profile </a>
+            <% elsif current_user.is_not_producer?%>
+              <div>
+                <a href="/users/new_role"> Become a Producer </a>
+              </div>
+            <% elsif current_user.is_not_comedian?%>
+              <div>
+                <a href="/users/new_role"> Become a Comedian </a>
+              </div>
+            <% end %>
+
+            <div>
+              <a href="/users/my_shows"> My Shows </a>
+            </div>
+            <div>
+              <a href="/users/my_bookmarks"> My Bookmarks </a>
+            </div>
+            <div>
+              <a href="/users/edit"> Account Setting</a>
+            </div>
+            <div>
+              <a href="/users/sign_out"> Sign-out </a>
+            </div>
+          </div>
+        </div>
+
+      <% else %>
+        <div>
+          <a class="nav-link" href="/users/sign_in">Sign-in</a>
+        </div>
+      <% end %>
+
     </div>
 
-    <% elsif current_user.is_producer?%>
-    <div>
-    <a href="/producers/<%= current_user.producer_name.gsub(' ', '_')%>"> Producer Profile </a>
-    </div>
-    <% elsif current_user.is_comedian?%>
-    <div>
-    <a href="/comedians/<%= current_user.comedian_name.gsub(' ', '_')%>"> Comedian Profile </a>
-    </div>
-    <% end %>
+   <% if notice.present? %>
+        <div style="color: green">
+          <%= notice %>
+        </div>
+      <% end %>
 
-    <% if current_user.is_not_comedian? && current_user.is_not_producer? %>    
-    <div>
-    <a href="/users/new_role"> Become a Comedian/Producer </a>
-    </div>
-
-    <% elsif current_user.is_not_producer?%>    
-    <div>
-    <a href="/users/new_role"> Become a Producer </a>
-    </div>
-    <% elsif current_user.is_not_comedian?%>    
-    <div>
-    <a href="/users/new_role"> Become a Comedian </a>
-    </div>    
-    <% end %>
-    
-    <div>
-    <a href="/users/my_shows"> My Shows </a>   
-    </div>
-    <div>
-    <a href="/users/my_bookmarks"> My Bookmarks </a>    
-    </div>
-    <div>
-    <a href="/users/edit"> Account Setting</a>
-    </div>
-    <div>
-    <a href="/users/sign_out"> Sign-out </a>
-    </div>
-  </div>
-  
-  <% else %>
-  <div>
-  <a href="/users/sign_in"> Sign-in </a>
-  <% end %>
+      <% if alert.present? %>
+        <div style="color: red">
+          <%= alert %>
+        </div>
+      <% end %>
 
   </nav>
 
+  
 
 
-  <body>
-    <%= yield %>
-  </body>
-</html>
+    <body>
+      <%= yield %>
+    </body>
+  </html>

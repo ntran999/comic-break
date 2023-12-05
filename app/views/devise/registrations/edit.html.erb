@@ -31,6 +31,46 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <% if current_user.is_comedian? %>
+  Edit Your Comedian Profile
+  <div class="field">
+    <%= f.label :comedian_name %><br />
+    <%= f.text_field :comedian_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :comedian_bio %><br />
+    <%= f.text_field :comedian_bio, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :short_comedian_bio %><br />
+    <%= f.text_field :short_comedian_bio, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :comedian_profile_pic %><br />
+    <%= f.text_field :comedian_profile_pic, autofocus: true %>
+  </div>
+  <% else %>
+  <% end %>
+
+  <% if current_user.is_producer?%>
+  Edit Your Producer Profile
+  <div class="field">
+    <%= f.label :producer_name %><br />
+    <%= f.text_field :producer_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :producer_profile_pic %><br />
+    <%= f.text_field :producer_profile_pic, autofocus: true %>
+  </div>
+  <% else %>
+  <% end %>
+
+
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

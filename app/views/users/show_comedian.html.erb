@@ -45,8 +45,9 @@
 </div>
 
 <hr>
-<h4> Shows Performed </h4>
 
+<% if @the_user.show_sign_ups.count > 0 %>
+<h4> Shows Performed </h4>
 <div>
   <div>
     <table border="1">
@@ -109,6 +110,7 @@
     </table>
   </div>
 </div>
-
-
 <hr>
+<% else %>
+<%= @the_user.comedian_name %> has not signed up for any show at the moment. 
+<% end %>

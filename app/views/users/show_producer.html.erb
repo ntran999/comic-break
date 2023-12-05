@@ -37,7 +37,8 @@
 </div>
 
 <hr>
-Shows Produced
+<% if @the_user.shows.count > 0 %>
+<h3> Shows Produced </h3>
 <div>
   <div>
     <table border="1">
@@ -116,5 +117,7 @@ Shows Produced
     </table>
   </div>
 </div>
-
 <hr>
+<% else %>
+<%= @the_user.producer_name%> hasn't added any show at the moment.
+<% end %>
