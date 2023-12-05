@@ -1,23 +1,24 @@
 <div>
   <% if current_user.is_producer_and_comedian? %>
-    <h1>
+    <h2>
       Productions 
-    </h1>
-    <div>
-    <h5>
+    </h2>
+    
+    <h6>
       Producer: <a href="/producers/<%= current_user.producer_name.gsub(" ","_")%>"><%= current_user.producer_name%></a>
-    </h5>
-    </div>
+    </h6>
+    
       <div>
-      <h3> Upcoming shows (<%= @list_of_current_shows.count %>)</h3>
+      <h4> Upcoming shows (<%= @list_of_current_shows.count %>)</h4>
       </div>
 
-      
+      <hr>
       <div>
-        <h4>
+        <h5>
           Add a new show
-        </h4>
+        </h5>
 
+        
         <form action="/insert_show" method="post">
           
           <div>
@@ -103,380 +104,168 @@
           </select>       
           </div>
 
-          <button>
+          <button class="btn btn-primary">
             Create show
           </button>
         </form>
       </div>
 
+      <hr>
+
       <% if @list_of_current_shows.count == 0 %>
       <p> You do not have any current show at the moment. </p>
       <% else %>
-      <div>
-            <table border="1">
-              <tr>
-                <th>
-                  Image
-                </th>
-
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Time
-                </th>
-
-                <th>
-                  Venue 
-                </th>
-
-                <th>
-                  Address 
-                </th>
-
-                <th>
-                  Show type
-                </th>
-
-                <th>
-                </th>
-              </tr>
-
-              <% @list_of_current_shows.each do |a_show| %>
-              <tr>
-                <td>
-                  <img src="<%= a_show.image%>" style = "width:250px;">
-                </td>
-
-                <td>
-                  <%= a_show.name %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%a, %b %d') %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%I:%M %p') %>
-                </td>
-
-                <td>
-                  <%= a_show.venue_name %>
-                </td>
-
-                <td>
-                  <%= a_show.address %>
-                  <div>
-                  <%= a_show.city %>, <%= a_show.state %>
-                </td>
-
-                <td>
-                  <%= a_show.show_type.name %>
-                </td>
-
-                <td>
-                  <a href="/shows/<%= a_show.id %>">
-                    Show details
-                  </a>
-                </td>
-              </tr>
-              <% end %>
-            </table>
-      </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <% @list_of_current_shows.each do |a_show| %>
+            <div class="col">
+              <div class="card h-100">
+                <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+                <div class="card-body">
+                  <h5 class="card-title"><%= a_show.name %></h5>
+                  <p class="card-text">
+                    <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+                    <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+                    <strong>Venue:</strong> <%= a_show.venue_name %><br>
+                    <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+                    <strong>Show Type:</strong> <%= a_show.show_type.name %>
+                  </p>
+                </div>
+                <hr>
+                <div class="card-footer">
+                  <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
 
       <div>
-      <h3> Archived shows (<%= @list_of_archived_shows.count %>)</h3>
+      <h4> Archived shows (<%= @list_of_archived_shows.count %>)</h4>
       </div>
 
       <% if @list_of_archived_shows.count  == 0 %>
       <p> You do not have any archived show at the moment. </p>
       <% else %>
-      <div>
-            <table border="1">
-              <tr>
-                <th>
-                  Image
-                </th>
-
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Time
-                </th>
-
-                <th>
-                  Venue 
-                </th>
-
-                <th>
-                  Address 
-                </th>
-
-                <th>
-                  Show type
-                </th>
-
-                <th>
-                </th>
-              </tr>
-
-              <% @list_of_archived_shows.each do |a_show| %>
-              <tr>
-                <td>
-                  <img src="<%= a_show.image%>" style = "width:250px;">
-                </td>
-
-                <td>
-                  <%= a_show.name %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%a, %b %d') %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%I:%M %p') %>
-                </td>
-
-                <td>
-                  <%= a_show.venue_name %>
-                </td>
-
-                <td>
-                  <%= a_show.address %>
-                  <div>
-                  <%= a_show.city %>, <%= a_show.state %>
-                </td>
-
-                <td>
-                  <%= a_show.show_type.name %>
-                </td>
-
-                <td>
-                  <a href="/shows/<%= a_show.id %>">
-                    Show details
-                  </a>
-                </td>
-              </tr>
-              <% end %>
-            </table>
-      </div>
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+          <% @list_of_archived_shows.each do |a_show| %>
+            <div class="col">
+              <div class="card h-100">
+                <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+                <div class="card-body">
+                  <h5 class="card-title"><%= a_show.name %></h5>
+                  <p class="card-text">
+                    <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+                    <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+                    <strong>Venue:</strong> <%= a_show.venue_name %><br>
+                    <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+                    <strong>Show Type:</strong> <%= a_show.show_type.name %>
+                  </p>
+                </div>
+                <hr>
+                <div class="card-footer">
+                  <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>      
       <% end %>
 
-      <hr>
-    <h1>
+    <hr>
+    <h2>
       Gigs
-    </h1>
-    <div>
-    <h5>
+    </h2>
+    
+    <h6>
       Comedian: <a href="/comedians/<%= current_user.comedian_name.gsub(" ","_")%>"><%= current_user.comedian_name%></a>
-    <h5>
-    </div>
+    <h6>
+    
       <div>
-      <h3> Upcoming shows (<%= @list_of_current_sign_up.count %>)</h3>
+      <h4> Upcoming shows (<%= @list_of_current_sign_up.count %>)</h4>
       </div>
 
       <% if @list_of_current_sign_up.count == 0 %>
       <p> You have not signed up to any current show at the moment. </p>
       <% else %>
-      <div>
-            <table border="1">
-              <tr>
-                <th>
-                  Image
-                </th>
-
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Time
-                </th>
-
-                <th>
-                  Venue 
-                </th>
-
-                <th>
-                  Address 
-                </th>
-
-                <th>
-                  Show type
-                </th>
-
-                <th>
-                </th>
-              </tr>
-
-              <% @list_of_current_sign_up.each do |sign_up| %>
-              <% a_show = sign_up.show %>
-              <tr>
-                <td>
-                  <img src="<%= a_show.image%>" style = "width:250px;">
-                </td>
-
-                <td>
-                  <%= a_show.name %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%a, %b %d') %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%I:%M %p') %>
-                </td>
-
-                <td>
-                  <%= a_show.venue_name %>
-                </td>
-
-                <td>
-                  <%= a_show.address %>
-                  <div>
-                  <%= a_show.city %>, <%= a_show.state %>
-                </td>
-
-                <td>
-                  <%= a_show.show_type.name %>
-                </td>
-
-                <td>
-                  <a href="/shows/<%= a_show.id %>">
-                    Show details
-                  </a>
-                </td>
-              </tr>
-              <% end %>
-            </table>
-      </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <% @list_of_current_shows.each do |a_show| %>
+            <div class="col">
+              <div class="card h-100">
+                <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+                <div class="card-body">
+                  <h5 class="card-title"><%= a_show.name %></h5>
+                  <p class="card-text">
+                    <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+                    <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+                    <strong>Venue:</strong> <%= a_show.venue_name %><br>
+                    <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+                    <strong>Show Type:</strong> <%= a_show.show_type.name %>
+                  </p>
+                </div>
+                <hr>
+                <div class="card-footer">
+                  <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>      
       <% end %>
 
       <div>
-      <h3> Archived shows (<%= @list_of_archived_sign_up.count %>)</h3>
+      <h4> Archived shows (<%= @list_of_archived_sign_up.count %>)</h4>
       </div>
 
       <% if @list_of_archived_sign_up.count == 0 %>
       <p> You did not sign up to any archived show. </p>
       <% else %>
-      <div>
-            <table border="1">
-              <tr>
-                <th>
-                  Image
-                </th>
-
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Time
-                </th>
-
-                <th>
-                  Venue 
-                </th>
-
-                <th>
-                  Address 
-                </th>
-
-                <th>
-                  Show type
-                </th>
-
-                <th>
-                </th>
-              </tr>
-
-              <% @list_of_archived_sign_up.each do |sign_up| %>
-              <% a_show = sign_up.show %>
-              <tr>
-                <td>
-                  <img src="<%= a_show.image%>" style = "width:250px;">
-                </td>
-
-                <td>
-                  <%= a_show.name %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%a, %b %d') %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%I:%M %p') %>
-                </td>
-
-                <td>
-                  <%= a_show.venue_name %>
-                </td>
-
-                <td>
-                  <%= a_show.address %>
-                  <div>
-                  <%= a_show.city %>, <%= a_show.state %>
-                </td>
-
-                <td>
-                  <%= a_show.show_type.name %>
-                </td>
-
-                <td>
-                  <a href="/shows/<%= a_show.id %>">
-                    Show details
-                  </a>
-                </td>
-              </tr>
-              <% end %>
-            </table>
-      </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <% @list_of_archived_shows.each do |a_show| %>
+              <div class="col">
+                <div class="card h-100">
+                  <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= a_show.name %></h5>
+                    <p class="card-text">
+                      <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+                      <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+                      <strong>Venue:</strong> <%= a_show.venue_name %><br>
+                      <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+                      <strong>Show Type:</strong> <%= a_show.show_type.name %>
+                    </p>
+                  </div>
+                  <hr>
+                  <div class="card-footer">
+                    <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>      
       <% end %>
 
       <hr>
-
-  <% elsif current_user.is_producer? %>
-    <h1>
+ <% elsif current_user.is_producer? %>
+    <h2>
       Productions 
-    </h1>
-    <div>
-    <h5>
+    </h2>
+    
+    <h6>
       Producer: <a href="/producers/<%= current_user.producer_name.gsub(" ","_")%>"><%= current_user.producer_name%></a>
-    </h5>
-    </div>
+    </h6>
+    
       <div>
-      <h3> Upcoming shows (<%= @list_of_current_shows.count %>)</h3>
+      <h4> Upcoming shows (<%= @list_of_current_shows.count %>)</h4>
       </div>
 
-      
+      <hr>
       <div>
-        <h4>
+        <h5>
           Add a new show
-        </h4>
+        </h5>
 
+        
         <form action="/insert_show" method="post">
           
           <div>
@@ -555,366 +344,154 @@
               Show type
             </label>
 
-            <select id="show_type_name_box" name="query_show_type_name" <!--value="<%#= @the_show.show_type.name--> %>">
+            <select id="show_type_name_box" name="query_show_type_name">
             <% ShowType.all.each do |show_type| %>
               <option value="<%= show_type.name %>"><%= show_type.name %></option>
             <% end %>
           </select>       
           </div>
 
-          <button>
+          <button class="btn btn-primary">
             Create show
           </button>
         </form>
       </div>
 
+      <hr>
+
       <% if @list_of_current_shows.count == 0 %>
       <p> You do not have any current show at the moment. </p>
       <% else %>
-      <div>
-            <table border="1">
-              <tr>
-                <th>
-                  Image
-                </th>
-
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Time
-                </th>
-
-                <th>
-                  Venue 
-                </th>
-
-                <th>
-                  Address 
-                </th>
-
-                <th>
-                  Show type
-                </th>
-
-                <th>
-                </th>
-              </tr>
-
-              <% @list_of_current_shows.each do |a_show| %>
-              <tr>
-                <td>
-                  <img src="<%= a_show.image%>" style = "width:250px;">
-                </td>
-
-                <td>
-                  <%= a_show.name %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%a, %b %d') %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%I:%M %p') %>
-                </td>
-
-                <td>
-                  <%= a_show.venue_name %>
-                </td>
-
-                <td>
-                  <%= a_show.address %>
-                  <div>
-                  <%= a_show.city %>, <%= a_show.state %>
-                </td>
-
-                <td>
-                  <%= a_show.show_type.name %>
-                </td>
-
-                <td>
-                  <a href="/shows/<%= a_show.id %>">
-                    Show details
-                  </a>
-                </td>
-              </tr>
-              <% end %>
-            </table>
-      </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <% @list_of_current_shows.each do |a_show| %>
+            <div class="col">
+              <div class="card h-100">
+                <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+                <div class="card-body">
+                  <h5 class="card-title"><%= a_show.name %></h5>
+                  <p class="card-text">
+                    <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+                    <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+                    <strong>Venue:</strong> <%= a_show.venue_name %><br>
+                    <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+                    <strong>Show Type:</strong> <%= a_show.show_type.name %>
+                  </p>
+                </div>
+                <hr>
+                <div class="card-footer">
+                  <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
 
       <div>
-      <h3> Archived shows (<%= @list_of_archived_shows.count %>)</h3>
+      <h4> Archived shows (<%= @list_of_archived_shows.count %>)</h4>
       </div>
 
       <% if @list_of_archived_shows.count  == 0 %>
       <p> You do not have any archived show at the moment. </p>
       <% else %>
-      <div>
-            <table border="1">
-              <tr>
-                <th>
-                  Image
-                </th>
-
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Time
-                </th>
-
-                <th>
-                  Venue 
-                </th>
-
-                <th>
-                  Address 
-                </th>
-
-                <th>
-                  Show type
-                </th>
-
-                <th>
-                </th>
-              </tr>
-
-              <% @list_of_archived_shows.each do |a_show| %>
-              <tr>
-                <td>
-                  <img src="<%= a_show.image%>" style = "width:250px;">
-                </td>
-
-                <td>
-                  <%= a_show.name %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%a, %b %d') %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%I:%M %p') %>
-                </td>
-
-                <td>
-                  <%= a_show.venue_name %>
-                </td>
-
-                <td>
-                  <%= a_show.address %>
-                  <div>
-                  <%= a_show.city %>, <%= a_show.state %>
-                </td>
-
-                <td>
-                  <%= a_show.show_type.name %>
-                </td>
-
-                <td>
-                  <a href="/shows/<%= a_show.id %>">
-                    Show details
-                  </a>
-                </td>
-              </tr>
-              <% end %>
-            </table>
-      </div>
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+          <% @list_of_archived_shows.each do |a_show| %>
+            <div class="col">
+              <div class="card h-100">
+                <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+                <div class="card-body">
+                  <h5 class="card-title"><%= a_show.name %></h5>
+                  <p class="card-text">
+                    <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+                    <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+                    <strong>Venue:</strong> <%= a_show.venue_name %><br>
+                    <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+                    <strong>Show Type:</strong> <%= a_show.show_type.name %>
+                  </p>
+                </div>
+                <hr>
+                <div class="card-footer">
+                  <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>      
       <% end %>
-
-      <hr>
 
   <% elsif current_user.is_comedian? %>
-    <h1>
+    <h2>
       Gigs
-    </h1>
-    <div>
-    <h5>
+    </h2>
+    
+    <h6>
       Comedian: <a href="/comedians/<%= current_user.comedian_name.gsub(" ","_")%>"><%= current_user.comedian_name%></a>
-    <h5>
-    </div>
+    <h6>
+    
       <div>
-      <h3> Upcoming shows (<%= @list_of_current_sign_up.count %>)</h3>
+      <h4> Upcoming shows (<%= @list_of_current_sign_up.count %>)</h4>
       </div>
 
       <% if @list_of_current_sign_up.count == 0 %>
       <p> You have not signed up to any current show at the moment. </p>
       <% else %>
-      <div>
-            <table border="1">
-              <tr>
-                <th>
-                  Image
-                </th>
-
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Time
-                </th>
-
-                <th>
-                  Venue 
-                </th>
-
-                <th>
-                  Address 
-                </th>
-
-                <th>
-                  Show type
-                </th>
-
-                <th>
-                </th>
-              </tr>
-
-              <% @list_of_current_sign_up.each do |sign_up| %>
-              <% a_show = sign_up.show %>
-              <tr>
-                <td>
-                  <img src="<%= a_show.image%>" style = "width:250px;">
-                </td>
-
-                <td>
-                  <%= a_show.name %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%a, %b %d') %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%I:%M %p') %>
-                </td>
-
-                <td>
-                  <%= a_show.venue_name %>
-                </td>
-
-                <td>
-                  <%= a_show.address %>
-                  <div>
-                  <%= a_show.city %>, <%= a_show.state %>
-                </td>
-
-                <td>
-                  <%= a_show.show_type.name %>
-                </td>
-
-                <td>
-                  <a href="/shows/<%= a_show.id %>">
-                    Show details
-                  </a>
-                </td>
-              </tr>
-              <% end %>
-            </table>
-      </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <% @list_of_current_shows.each do |a_show| %>
+            <div class="col">
+              <div class="card h-100">
+                <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+                <div class="card-body">
+                  <h5 class="card-title"><%= a_show.name %></h5>
+                  <p class="card-text">
+                    <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+                    <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+                    <strong>Venue:</strong> <%= a_show.venue_name %><br>
+                    <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+                    <strong>Show Type:</strong> <%= a_show.show_type.name %>
+                  </p>
+                </div>
+                <hr>
+                <div class="card-footer">
+                  <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>      
       <% end %>
 
       <div>
-      <h3> Archived shows (<%= @list_of_archived_sign_up.count %>)</h3>
+      <h4> Archived shows (<%= @list_of_archived_sign_up.count %>)</h4>
       </div>
 
       <% if @list_of_archived_sign_up.count == 0 %>
       <p> You did not sign up to any archived show. </p>
       <% else %>
-      <div>
-            <table border="1">
-              <tr>
-                <th>
-                  Image
-                </th>
-
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Time
-                </th>
-
-                <th>
-                  Venue 
-                </th>
-
-                <th>
-                  Address 
-                </th>
-
-                <th>
-                  Show type
-                </th>
-
-                <th>
-                </th>
-              </tr>
-
-              <% @list_of_archived_sign_up.each do |sign_up| %>
-              <% a_show = sign_up.show %>
-              <tr>
-                <td>
-                  <img src="<%= a_show.image%>" style = "width:250px;">
-                </td>
-
-                <td>
-                  <%= a_show.name %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%a, %b %d') %>
-                </td>
-
-                <td>
-                  <%= a_show.date.strftime('%I:%M %p') %>
-                </td>
-
-                <td>
-                  <%= a_show.venue_name %>
-                </td>
-
-                <td>
-                  <%= a_show.address %>
-                  <div>
-                  <%= a_show.city %>, <%= a_show.state %>
-                </td>
-
-                <td>
-                  <%= a_show.show_type.name %>
-                </td>
-
-                <td>
-                  <a href="/shows/<%= a_show.id %>">
-                    Show details
-                  </a>
-                </td>
-              </tr>
-              <% end %>
-            </table>
-      </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <% @list_of_archived_shows.each do |a_show| %>
+              <div class="col">
+                <div class="card h-100">
+                  <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= a_show.name %></h5>
+                    <p class="card-text">
+                      <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+                      <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+                      <strong>Venue:</strong> <%= a_show.venue_name %><br>
+                      <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+                      <strong>Show Type:</strong> <%= a_show.show_type.name %>
+                    </p>
+                  </div>
+                  <hr>
+                  <div class="card-footer">
+                    <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>      
       <% end %>
 
+      <hr>
 <% end %>
+ 
