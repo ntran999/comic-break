@@ -34,6 +34,10 @@ strong {
   color: #333;
 }
 
+/* a {
+  color: #474787;
+} */
+
 code,
 pre {
   background: #eee;
@@ -48,10 +52,6 @@ pre {
   padding: 1em;
   border-left: 2px solid #69c;
 
-}
-
-a {
-  color: #41b3a3;
 }
 
 
@@ -77,4 +77,10 @@ pre {
   align-content: space-between;
   align-items: center;
   justify-content: center;
+  color: #f5f7f9; 
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 150px; /* Adjust the height as needed */
 }

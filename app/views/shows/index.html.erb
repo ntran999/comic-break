@@ -1,8 +1,8 @@
 <div>
   <div>
-    <h1>
+    <h2>
       List of all shows
-    </h1>
+    </h2>
   </div>
 </div>
 
@@ -14,49 +14,11 @@
 
 <% else %>
 
-<div>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-</div>
-
-<script>
-require "http"
-require "json"
-
-@url_link = "https://maps.googleapis.com/maps/api/js?key="+ENV.fetch("MY_GMAP_KEY")+"&callback=initMap"
 
 
-  function initMap() {
-    var mapDiv = document.getElementById('map');
 
-    var map = new google.maps.Map(mapDiv);
 
-    var bounds = new google.maps.LatLngBounds();
-    
-    var infowindow = new google.maps.InfoWindow({
-      content: "Click Content" 
-    });
-    
-    var marker = new google.maps.Marker({
-      position: {lat: 41.8381065, lng: -87.6512738}, 
-      map: map,
-      title: 'Hello World!',
-      icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png' 
-    });
-    
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-
-  bounds.extend(new google.maps.LatLng(41.8381065, -87.6512738 ));
-
-  map.fitBounds(bounds);
-  };
-  
-</script>
-<script src= <%= @url_link%>
-async defer></script>
-
-<hr>
+<!--<hr>
 <div>
   <div>
     <table border="1">
@@ -93,47 +55,71 @@ async defer></script>
         </th>
       </tr>
 
-      <% @list_of_shows.each do |a_show| %>
-      <tr>
+      <%# @list_of_shows.each do |a_show| %>-->
+<!--      <tr>
         <td>
-          <img src="<%= a_show.image%>" style = "width:250px;">
+          <img src="<%#= a_show.image%>" style = "width:250px;">
         </td>
 
         <td>
-          <%= a_show.name %>
-        </td>
+          <%#= a_show.name %>-->
+<!--        </td>
 
         <td>
-          <%= a_show.date.strftime('%a, %b %d') %>
-        </td>
+          <%#= a_show.date.strftime('%a, %b %d') %>-->
+<!--        </td>
 
         <td>
-          <%= a_show.date.strftime('%I:%M %p') %>
-        </td>
+          <%#= a_show.date.strftime('%I:%M %p') %>-->
+<!--        </td>
 
         <td>
-          <%= a_show.venue_name %>
-        </td>
+          <%#= a_show.venue_name %>-->
+<!--        </td>
 
         <td>
-          <%= a_show.address %>
-          <div>
-          <%= a_show.city %>, <%= a_show.state %>
-        </td>
+          <%#= a_show.address %>-->
+<!--          <div>-->
+          <%#= a_show.city %>, <%#= a_show.state %>
+<!--        </td>
 
         <td>
-          <%= a_show.show_type.name %>
-        </td>
+          <%#= a_show.show_type.name %>-->
+<!--        </td>
 
         <td>
-          <a href="/shows/<%= a_show.id %>">
+          <a href="/shows/<%#= a_show.id %>">
             Show details
           </a>
         </td>
       </tr>
-      <% end %>
-    </table>
+      <%# end %>-->
+<!--    </table>
   </div>
+</div>-->
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @list_of_shows.each do |a_show| %>
+    <div class="col">
+      <div class="card h-100">
+        <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
+        <div class="card-body">
+          <h5 class="card-title"><%= a_show.name %></h5>
+          <p class="card-text">
+            <strong><%= a_show.date.strftime('%a, %b %d') %></strong><br>
+            <strong><%= a_show.date.strftime('%I:%M %p') %></strong><br>
+            <strong>Venue:</strong> <%= a_show.venue_name %><br>
+            <strong>Address:</strong> <%= a_show.address %>, <%= a_show.city %>, <%= a_show.state %><br>
+            <strong>Show Type:</strong> <%= a_show.show_type.name %>
+          </p>
+        </div>
+        <hr>
+        <div class="card-footer">
+          <a href="/shows/<%= a_show.id %>" class="btn btn-primary">Show Details</a>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <hr>
