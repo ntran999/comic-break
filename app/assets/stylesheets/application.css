@@ -88,3 +88,7 @@ pre {
   object-fit: cover;
   height: 150px; /* Adjust the height as needed */
 }
+
+.alert {
+  margin-top: 20px;
+}

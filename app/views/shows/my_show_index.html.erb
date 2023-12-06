@@ -189,7 +189,8 @@
       <p> You have not signed up to any current show at the moment. </p>
       <% else %>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <% @list_of_current_shows.each do |a_show| %>
+          <% @list_of_current_sign_up.each do |a_sign_up| %>
+          <% a_show = a_sign_up.show%>
             <div class="col">
               <div class="card h-100">
                 <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
@@ -221,7 +222,8 @@
       <p> You did not sign up to any archived show. </p>
       <% else %>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <% @list_of_archived_shows.each do |a_show| %>
+            <% @list_of_archived_sign_up.each do |a_sign_up| %>
+            <% a_show = a_sign_up.show%>
               <div class="col">
                 <div class="card h-100">
                   <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
@@ -436,7 +438,8 @@
       <p> You have not signed up to any current show at the moment. </p>
       <% else %>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <% @list_of_current_shows.each do |a_show| %>
+          <% @list_of_current_sign_up.each do |a_sign_up| %>
+          <% a_show = a_sign_up.show%>
             <div class="col">
               <div class="card h-100">
                 <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">
@@ -468,7 +471,8 @@
       <p> You did not sign up to any archived show. </p>
       <% else %>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <% @list_of_archived_shows.each do |a_show| %>
+            <% @list_of_archived_shows.each do |a_sign_up| %>
+            <% a_show = a_sign_up.show%>
               <div class="col">
                 <div class="card h-100">
                   <img src="<%= a_show.image %>" class="card-img-top" style="width: 100%;" alt="<%= a_show.name %> Image">

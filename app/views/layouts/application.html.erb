@@ -106,18 +106,8 @@
       <% end %>
 
     </div>
-
-   <% if notice.present? %>
-        <div style="color: green">
-          <%= notice %>
-        </div>
-      <% end %>
-
-      <% if alert.present? %>
-        <div style="color: red">
-          <%= alert %>
-        </div>
-      <% end %>
+    
+   
 
   </nav>
 
@@ -125,6 +115,26 @@
 
 
     <body>
+      <% if notice.present? %>
+        <div class="row">
+          <div class="col-12">
+            <div class="alert alert-success" role="alert">
+              <%= notice %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <% if alert.present? %>
+        
+        <div class="row">
+          <div class="col-12">
+            <div class="alert alert-warning" role="alert">
+              <%= alert %>
+            </div>
+          </div>
+        </div>
+      <% end %>
       <%= yield %>
     </body>
   </html>
